@@ -1,0 +1,199 @@
+/*
+THIS PAGE IS FOR THE STYLING OF ALL OF THE TABLES IN THE WEBSITE
+*/
+
+.div-table {
+    overflow-x: auto;
+    width: 100%;
+  }
+  
+  @media (max-width: 700px) {
+    .info-shown-div {
+      flex-direction: column;
+    }
+  }
+  
+  main a {
+    color: var(--light-header);
+  }
+  
+  main a:active {
+    text-decoration: none;
+  }
+  
+  /* Info in the default page */
+  .info-table {
+    width: 100%;
+  }
+  
+  .info-table caption {
+    font-size: 1.2rem;
+    font-weight: 200;
+  }
+  
+  .info-table table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 25px 0;
+  }
+  
+  .info-table tr td:nth-child(1) {
+    background-color: var(--light-header);
+  }
+  
+  .info-table td {
+    width: 50%;
+    border: 1px solid black;
+    padding: 5px;
+  }
+  
+  /* All features with tables have this div around them */
+  
+  .div-table {
+    border: 1px solid black;
+    background-color: var(--lightest-yellow);
+  }
+  
+  .div-table table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: white;
+  }
+  
+  .div-table .row:hover {
+    background-color: var(--light-header);
+    color: rgb(255, 0, 0);
+    cursor: pointer;
+    transition: .3s;
+  }
+  
+  .div-table .row {
+    background-color: var(#90cffc);
+    z-index: 100;
+  }
+  
+  .div-table table {
+    position: relative;
+  }
+  
+  .div-table .row + tr {
+    display: none;
+  }
+  
+  /* Info shows adjacent row in list */
+  
+  .info-shown {
+    color: blue;
+  }
+  
+  .info-shown + tr {
+    display: table-row !important;
+  }
+  
+  .info-shown-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .info-shown-div-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+  }
+  
+  .info-shown-div-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+  }
+  
+  .div-table tr:nth-child(1) {
+    background-color: var(--header-color);
+    color: black;
+  }
+  
+  .div-table td,
+  .div-table th {
+    padding: 5px;
+    border: 1px solid black;
+  }
+  
+  /*
+  Button shadow and button press animation
+  */
+  
+  .feature-url {
+    padding: 5px 11px;
+    margin: 2.5px;
+    border-radius: 3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--header-color);
+    box-shadow: inset 0 -10px 0 -7px rgba(0, 0, 0, 0.17);
+    text-align: center;
+    position: relative;
+    opacity: 0.75;
+    width: 100%;
+  }
+  
+  .feature-url input{
+      background-color: none;
+  }
+
+  .feature-url:hover {
+    opacity: 1;
+  }
+  
+  .feature-url:active {
+    top: 1px;
+  }
+  
+  /* Pagination */
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .pagination-link {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid black;
+    margin: 0 3px;
+  }
+  
+  span.pagination-link {
+    color: white;
+    background-color: var(--light-header);
+  }
+  
+  /* number of items from query */
+  
+  .total-count {
+    text-align: right;
+  }
+  
+  @media (max-width: 600px) {
+    .feature-url {
+      width: 100%;
+    }
+    .info-shown-div {
+      flex-direction: column;
+      align-items: unset;
+    }
+  }

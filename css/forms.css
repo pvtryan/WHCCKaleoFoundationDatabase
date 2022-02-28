@@ -1,0 +1,148 @@
+/*
+STYLES THE FORM ON LANDING PAGES
+ALLOWS FOR INPUT LABELS TO MOVE UP AND DOWN
+*/
+
+.form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* The person who is being edited */
+  .who{
+      margin: 15px 0;
+  }
+  .who > * {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  /* Form group per label and input tags for forms */
+  
+  .form-group {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .form-group > :is(input, select, textarea) {
+    padding: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
+    width: 100%;
+    /* max-width: 100%;
+    min-width: 100%; */
+  }
+  
+  .form-group > textarea {
+    font-size: 1rem !important;
+    height: 150px;
+    resize: none;
+  }
+  
+  .form-group > :is(input, select, textarea):focus {
+    outline: none;
+  }
+  
+  .form-group > label {
+    margin-bottom: 5px;
+    font-weight: 550;
+    color: var(--text-color);
+  }
+  
+  /* Submit button for forms */
+  
+  .form > input[type='submit'] {
+    margin: 10px 0;
+    padding: 5px 10px;
+    flex-grow: 0;
+    flex-shrink: 0;
+      flex: basis;
+  
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.15rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-color);
+    background-color: var(--light-header);
+    box-shadow: inset 0 -0.6rem 0 -0.35rem rgba(0, 0, 0, 0.17);
+    text-align: center;
+    position: relative;
+    opacity: 0.75;
+  }
+  
+  /* Red inputs and outline for when there's an error */
+  
+  .error {
+    color: red !important;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .input-error {
+    outline-width: 2px !important;
+    outline-style: solid !important;
+    outline-color: red !important;
+    background-color: rgba(255, 0, 0, 0.08);
+    border: none;
+  }
+  
+  .input-error:focus {
+    outline-width: 2px !important;
+    outline-style: solid !important;
+    outline-color: red !important;
+  }
+
+  .form-table{
+    padding: 5px 11px 0px 10px;
+    margin:2.5px 2.5px 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: inset 0 -10px 0 -7px rgba(0, 0, 0, 0.17);
+    text-align: center;
+    position: relative;
+    opacity: 0.75;
+    width: 100%;
+
+  }
+
+.form-table > input[type="submit"] {
+  padding: 5px 11px;
+  margin: 2.5px;
+  border-radius: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--text-color);
+  background-color: var(--header-color);
+  box-shadow: inset 0 -10px 0 -7px rgba(0, 0, 0, 0.17);
+  text-align: center;
+  position: relative;
+  opacity: 0.75;
+  width: 100%;
+  }
+
+  form-table > input[type="number"]{
+    padding: 5px 11px;
+    margin: 2.5px;
+    border-radius: 3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--header-color);
+    box-shadow: inset 0 -10px 0 -7px rgba(0, 0, 0, 0.17);
+    text-align: center;
+    position: relative;
+    opacity: 0.75;
+    width: 100%;
+  }
+
+  .form-table input{
+    background-color: none;
+}
