@@ -386,4 +386,16 @@ function get_quarters(){
     ";
     return query_many_np($sql);
 }
+
+function getall_donationvalue_quantity(){
+    $sql = "
+        SELECT
+            format(sum(Value),2) as total_value,
+            sum(Quantity) as total_quantity
+        FROM DonationProducts
+    ";
+    return query_one_np($sql);
+}
+
+
 ?>  

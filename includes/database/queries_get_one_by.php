@@ -140,8 +140,8 @@
     function get_value_of_donation($id){
         $sql ="
             SELECT 
-                SUM(Value) as total
-            FROM DonationProduct
+                FORMAT(SUM(Value),2) as total
+            FROM DonationProducts
             WHERE DonationID = ?
         ";
         return query_one_no_clean($sql,"s",[$id]);
@@ -152,7 +152,7 @@
         SELECT
             COUNT(DonationProducts.ProductID) AS countnum, 
             SUM(DonationProducts.Quantity) as total_quantity, 
-            SUM(DonationProducts.Value) as total_value 
+            FORMAT(SUM(DonationProducts.Value),2) as total_value 
         FROM DonationProducts 
         INNER JOIN Donation 
         ON DonationProducts.DonationID = Donation.DonationID 
@@ -166,7 +166,7 @@ function get_info_by_year_month($year,$month){
     SELECT
         COUNT(DonationProducts.ProductID) AS countnum, 
         SUM(DonationProducts.Quantity) as total_quantity, 
-        SUM(DonationProducts.Value) as total_value 
+        FORMAT(SUM(DonationProducts.Value),2) as total_value 
     FROM DonationProducts 
     INNER JOIN Donation 
     ON DonationProducts.DonationID = Donation.DonationID 
@@ -194,7 +194,7 @@ function get_info_by_year_quarter($year,$quarter){
     SELECT
         COUNT(DonationProducts.ProductID) AS countnum, 
         SUM(DonationProducts.Quantity) as total_quantity, 
-        SUM(DonationProducts.Value) as total_value 
+        FORMAT(SUM(DonationProducts.Value),2) as total_value 
     FROM DonationProducts 
     INNER JOIN Donation 
     ON DonationProducts.DonationID = Donation.DonationID 

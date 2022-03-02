@@ -4,8 +4,27 @@
     require('fpdf/fpdf.php');
 
     $donations = get_donation_list();
+    $stat = getall_donationvalue_quantity();
 
     class donationlistPDF extends FPDF{
+        function headercolor(){
+            //colors
+	        $this->SetFillColor(36,153,244);
+	        $this->SetTextColor(0,0,0);
+	        $this->SetDrawColor(71,71,71);
+	        $this->SetLineWidth(.3);
+        }
+
+        function cellnocolor(){
+
+	    $this->SetDrawColor(255,211,89);
+	    $this->SetFillColor(255,235,185);
+
+        $this->SetFillColor(255,255,255);
+	    $this->SetDrawColor(0,0,0);
+
+        }
+        
         function Header(){
             global $donations;
 
@@ -26,20 +45,36 @@
         }
 
         function donationList($header,$data){
-			global $donations;
-            
+			global $donations,$stat;
+
             $this->SetFont('Times','B','14');
 	    $this->Cell(40,10,'Inventory List',0,0,'C');
 	    $this->Ln();
-	
-    	$this->SetFont('Times','',12);
-	
-	    //colors
-	    $this->SetFillColor(36,153,244);
-	    $this->SetTextColor(0,0,0);
-	    $this->SetDrawColor(71,71,71);
+
+        $this->SetFont('Times','',12);
 	    $this->SetLineWidth(.3);
-	
+        $this->headercolor();
+        $this->Cell(45,7,'Total # of All Donation: ',1,0,'C',true);
+        $this-> cellnocolor();
+        $this->Cell(35,7,count(get_donation_list()),1,0,'R',true);
+        $this->cellnocolor();
+        $this->Ln();
+        $this->headercolor();
+        $this->Cell(45,7,'Total Quantity: ',1,0,'C',true);
+        $this-> cellnocolor();
+        $this->Cell(35,7,$stat["total_quantity"],1,0,'R',true);
+        $this->cellnocolor();
+        $this->Ln();
+        $this->headercolor();
+        $this->Cell(45,7,'Total Value: ',1,0,'C',true);
+        $this-> cellnocolor();
+        $this->Cell(35,7,'$ '.$stat["total_value"],1,0,'R',true);
+        $this->cellnocolor();
+
+
+        $this->Ln();
+        $this->Ln();
+        $this->headercolor();//sets cell color to blue for header
 	
 	    //width columns
 	    $w = array(25,60,60,35);
@@ -48,13 +83,7 @@
 		$this->Cell($w[$i],7,$header[$i],1,0,'C',true);
     	$this->Ln();
 	
-	
-	
-	    $this->SetDrawColor(255,211,89);
-	    $this->SetFillColor(255,235,185);
-
-        $this->SetFillColor(255,255,255);
-	    $this->SetDrawColor(0,0,0);
+        $this->cellnocolor(); //sets cell color to white 
 
         foreach( $donations as $donation){
 		    $this->SetTextColor(0,0,0);
