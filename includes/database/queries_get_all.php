@@ -103,7 +103,7 @@ function get_products($search = [],$count = false,$pagination = null){
 function get_sum_value(){
     $sql ="
         SELECT 
-	        sum(EstValue * ProductQuantity) as sum
+	        format(sum(EstValue * ProductQuantity),2) as sum
         From Product
     ";
     return query_one_np($sql);

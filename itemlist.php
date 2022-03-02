@@ -2,6 +2,10 @@
 require_once("includes/all.php");
 require_once('fpdf/fpdf.php');
 
+$products = product_pdf();
+$sum = get_sum_value();
+$sum_quantity=get_sum_quantity();
+
 class inventoryPDF extends FPDF
 {
 
@@ -12,7 +16,23 @@ function time_now(){
 	return $now;
 }
 
+function color_header(){
+	$this->SetFillColor(36,153,244);
+	$this->SetTextColor(0,0,0);
+	$this->SetDrawColor(71,71,71);
+	$this->SetLineWidth(.3);
+}
+
+function nocolor(){
+	$this->SetDrawColor(255,211,89);
+	$this->SetFillColor(255,235,185);
+
+    $this->SetFillColor(255,255,255);
+	$this->SetDrawColor(0,0,0);
+}
+
 function Header(){
+	global $sum,$sum_quantity;
 	$this->SetFont('Arial','B', 12);
 	$this->Cell($this->getPageWidth(),1,$this->time_now(),0,0,'L');
 	$this->Ln();
@@ -35,12 +55,29 @@ function Footer()
 }
 
 function itemlist($header,$data){
-    $products = product_pdf();
-    $this->SetFont('Times','B','14');
+    global $products,$sum,$sum_quantity;
+	$this->SetFont('Times','B','14');
 	$this->Cell(40,10,'Inventory List',0,0,'C');
 	$this->Ln();
 	
 	$this->SetFont('Times','',12);
+	$this->SetLineWidth(.3);
+	$this->color_header();
+	$this->Cell(41,7, 'Total # of All Products:',1,0,'L',true);
+	$this->nocolor();
+	$this->Cell(30,7, count(get_products()),1,0,'R',true);
+	$this->Ln();
+	$this->color_header();
+	$this->Cell(41,7,'Total Quantity:' ,1,0,'L',true);
+	$this->nocolor();
+	$this->Cell(30,7,$sum_quantity["sum_quantity"],1,0,'R',true);
+	$this->color_header();
+	$this->Ln();
+	$this->Cell(41,7,'Total Value: ',1,0,'L',true);
+	$this->nocolor();
+	$this->Cell(30,7,'$ '.$sum["sum"],1,0,'R',true);
+	$this->Ln();
+	$this->Ln();
 	
 	//colors
 	$this->SetFillColor(36,153,244);

@@ -32,16 +32,6 @@
 			$this->SetLineWidth(2);
 			$this->Ln();
 			$this->Line(10,40,$this->getPageWidth()-10,40);
-        
-            if(isset($_GET["Month"])){
-                $this->SetFont('Times','B',16);
-                $this->Cell(0,20,'For the Month of',0,0, 'C');
-                $this->Cell(0,20,$name["MonthName"],0,0, 'C');
-                $this->Ln();
-            }else if(isset($_GET["Quarter"])){
-            
-            }
-
             $this->SetFont('Times','',12);
             $this->SetLineWidth(.3);
             $this->Cell(41,7, 'Total # of All Products:',1,0,'L');
