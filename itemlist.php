@@ -33,12 +33,12 @@ function nocolor(){
 
 function Header(){
 	global $sum,$sum_quantity;
-	$this->SetFont('Arial','B', 12);
+	$this->SetFont('Arial','', 8);
 	$this->Cell($this->getPageWidth(),1,$this->time_now(),0,0,'L');
 	$this->Ln();
 
     $this->SetFont('Arial','B', 35);
-	$this->Cell($this->getPageWidth()-20,45,'WHCC Inventory List',0,0,'C');
+	$this->Cell($this->getPageWidth()-20,45,'WHCC - Kaleo Inventory List',0,0,'C');
 	$this->SetLineWidth(2);
 	$this->Line(10,40,$this->getPageWidth()-10,40);
 	$this->Ln();
@@ -57,8 +57,7 @@ function Footer()
 function itemlist($header,$data){
     global $products,$sum,$sum_quantity;
 	$this->SetFont('Times','B','14');
-	$this->Cell(40,10,'Inventory List',0,0,'C');
-	$this->Ln();
+
 	
 	$this->SetFont('Times','',12);
 	$this->SetLineWidth(.3);
@@ -79,6 +78,12 @@ function itemlist($header,$data){
 	$this->Ln();
 	$this->Ln();
 	
+
+	$this->SetFont('Times','B','14');
+	$this->Cell(40,10,'Inventory List',0,0,'C');
+	$this->Ln();
+
+	$this->SetFont('Times','',12);
 	//colors
 	$this->SetFillColor(36,153,244);
 	$this->SetTextColor(0,0,0);

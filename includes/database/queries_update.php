@@ -44,5 +44,14 @@
         return query($sql, "sisii",[$name,$quantity, $unit, $value,$id]);
     }
 
+    function update_quantity_donation($quantity,$value,$donationID,$productID){
+        $sql="
+            UPDATE DonationProducts 
+            SET Quantity = ? Value = ?
+            WHERE DonationID = ? AND ProductID = ?
+        ";
+        return query($sql,"ii",[$quantity,$value,$donationID,$productID]);
+    }
+
 
 ?>

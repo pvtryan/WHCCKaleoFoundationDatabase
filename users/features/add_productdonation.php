@@ -7,29 +7,48 @@
     $products = get_products();
     $inputs = [];
     $errors = [];
+  /*  if($_GET["complete"] === true){
+        echo "<h3 style ='color:green'>Product Added</h3>";
+    }
 
-    if($_POST["submit_donation"]){
+    if($_GET["complete"] === false){
+        echo "<h3 style='color:red'>Quantity Cannot be Empty</h3>";
+    }
+
+*/
+    if(isset($_POST["submit_donation"])){
         if ($_POST['newquantity'] === '') {
     
-            change_page("user.php?feature=add_productdonation&DonationID={$DonationID}&complete=0");
+            change_page("user.php?feature=add_productdonation&DonationID={$DonationID}&complete=false");
         }else{
 
         change_page("user.php?feature=add_productdonation&DonationID={$DonationID}&productID={$_POST["productID"]}&quantity={$_POST["newquantity"]}");
         }
     }
 
-    if($_GET["complete"] === 1){
+    if(isset($_POST["submit_change"])){
+        if ($_POST['changequantity'] === '') {
+            change_page("user.php?feature=add_productdonation&DonationID={$DonationID}&complete=false");
+        }else{
+            change_page("user.php?feature=add_productdonation&DonationID={$DonationID}&productID={$_POST["productID"]}&changequantity={$_POST["changequantity"]}");
+        }
+    }
+
+    if($_GET["complete"] === true){
         echo "<h3 style ='color:green'>Product Added</h3>";
     }
 
-    if($_GET["complete"] === 0){
-        echo "<h3 style='color:red'>Quantity Cannot be Empty</h3>";
-    }
+   
 
     if(isset($_GET["quantity"])){
         $productID = $_GET["productID"];
-        $newquantity = $_GET["quantity"];
-        $product = get_product_by_id($productID);
+        if($_GET["changequantity"]){
+            $changequantity = $_GET["changequantity"];
+        }else{
+            $newquantity = $_GET["quantity"];
+        }
+      
+         $product = get_product_by_id($productID);
         if($_GET["complete"] === 0){
             $errors["quantity"] = "Quantity Cannot be Empty";
         }  
@@ -43,18 +62,34 @@
          
                
                 if(empty($errors)){
-                    insert_donated($DonationID, $productID, $newquantity,$newquantity * $product["EstValue"]);
-                    $new_quantity = $product["ProductQuantity"] -  $newquantity;
-                    update_product_quantity($productID,$new_quantity);
+                    if(isset($changequantity)){
+                        $product_cur = get_product_by_id($productID);
+                        $product_cur["ProductQuantity"];
+                        $old=get_product_donated($DonationID,$productID);
+                       
+                        $new_value =  $product_cur["ProductQuantity"] + $old["Quantity"];
+                        update_quantity_donation($changequantity,$changequantity * $product["EstValue"],$DonationID,$productID);
+                        
+                        
+                        update_product_quantity($productID,$new_value-$changequantity);
+                        echo "<h3 style ='color:green'>Product Added</h3>";
+                    }else{
+                        insert_donated($DonationID, $productID, $newquantity,$newquantity * $product["EstValue"]);
+                        $new_quantity = $product["ProductQuantity"] -  $newquantity;
+                        update_product_quantity($productID,$new_quantity);
+                        echo "<h3 style ='color:green'>Product Added</h3>";
+                    }
                     echo "<h3 style ='color:green'>Product Added</h3>";
                     $input = [];
-                    change_page("user.php?feature=add_productdonation&DonationID={$DonationID}&complete=1");
+                    change_page("user.php?feature=add_productdonation&DonationID={$DonationID}&complete=true");
                     
                 }
 
     
         
             }
+        }else{
+            $errors["quantity"] = "Cannot";
         }
     }
 
@@ -94,6 +129,39 @@
                   
                 </div>
                 <div class="info-shown-div-links">
+                <button class="myBtn_multi">Change Quantity</button>
+
+
+<!-- The Modal -->
+<div class="modal modal_multi">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close close_multi">×</span>
+        <div class="modal-header">
+        <h3>Change Quantity For <?=$donate["ProductName"]?></h3>
+        </div>
+        <form method="post" class="quantity">
+        <div class="form-group">
+            <label>Change Quantity</label>
+            <input type = "number" min = "1" max="<?php 
+                 $product_cur = get_product_by_id($donate["ID"]);
+                $all = $product_cur["ProductQuantity"] + $donate["productused"];
+                    echo $all; ?>" 
+                    value="changequantity" name="changequantity" placeholder="MAX: <?php $product_cur2 = get_product_by_id($donate["ID"]);
+                    $all = $product_cur2["ProductQuantity"] + $donate["productused"];
+                    echo $all; ?>">
+                            <input type ="hidden" value="<?=show_value($donate, "ID")?>" name="productID">
+                            
+                          
+            <br>
+        
+            <input type="submit" name="submit_change" />
+            </form>
+        </div>
+    </div>
+</div>    
+            
                 </div>
         </td>
         </tr>
@@ -140,7 +208,7 @@
     <div class="modal-content">
         <span class="close close_multi">×</span>
         <div class="modal-header">
-        <h3>Donation for <?=$report["Year"]?></h3>
+        <h3>Add to Donation </h3>
         </div>
         <form method="post" class="quantity">
       

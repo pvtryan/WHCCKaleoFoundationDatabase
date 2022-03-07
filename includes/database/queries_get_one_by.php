@@ -233,4 +233,16 @@ LEFT OUTER JOIN Event
     return query_one_no_clean($sql, "s", [$id]);
 }
 
+function get_product_donated($donationID,$productID){
+    $sql = "
+        SELECT 
+        Quantity,
+        Value
+        FROM DonationProducts 
+        WHERE DonationID = ? 
+        AND ProductID = ?
+    ";
+
+    return query_one_no_clean($sql, "ss", [$donationID,$productID]);
+}
 ?>

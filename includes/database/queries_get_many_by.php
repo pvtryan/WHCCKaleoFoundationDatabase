@@ -22,6 +22,7 @@
         $sql = "
             SELECT 
                 DonationProducts.DonationID, 
+                Product.ProductID as ID,
                 Product.ProductName, 
                 Product.ProductUnit,
                 DonationProducts.Value,
