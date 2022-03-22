@@ -12,6 +12,7 @@
 <h1>Reports</h1>
 <hr>
 
+<a class="feature-url" href="alldonation.php" >Report PDF</a>
 <h3 class='total-count'><?= $pagination->get_total_rows() ?> Item(s)</h3>
 
 <button class="search-button">Search</button>

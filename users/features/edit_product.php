@@ -55,28 +55,28 @@ function validate_product($input){
     
     <div class="form-group">
         <label>Product Name</label>
-        <input <?= error_outline($errors, "productname")?> type="text" name="productname" value="<?=show_value($product, "ProductName")?>" required>
+        <input <?= error_outline($errors, "productname")?> type="text" name="productname" value="<?=show_value($product, "ProductName")?>" >
         <?=show_error($errors,"productname")?>
     </div>
 
     
     <div class="form-group">
         <label>Quantity</label>
-        <input <?= error_outline($errors, "quantity")?> type="text" name="quantity" value="<?=show_value($product, "ProductQuantity")?>" required>
+        <input <?= error_outline($errors, "quantity")?> type="text" name="quantity" value="<?=show_value($product, "ProductQuantity")?>" >
         <?=show_error($errors,"quantity")?>
     </div>
 
     
     <div class="form-group">
         <label>Product Unit</label>
-        <input <?=error_outline($errors, "productunits")?> type="text" name="productunits" value="<?=show_value($product,"ProductUnit")?>" required>
+        <input <?=error_outline($errors, "productunits")?> type="text" name="productunits" value="<?=show_value($product,"ProductUnit")?>" >
         <?=show_error($errors,"productunits")?>
     </div>
 
     
     <div class="form-group">
         <label>Estimated Price per <?=$product["ProductUnit"]?></label>
-        <input <?=error_outline($errors,"estvalue")?> type="text" name="estvalue" value="$<?=show_value($product,"EstValue")?>" required>
+        <input <?=error_outline($errors,"estvalue")?> type="text" name="estvalue" value="$<?=show_value($product,"EstValue")?>" >
         <?=show_error($errors, "estvalue")?>
         </div>
 

@@ -60,31 +60,31 @@
 
 <div class="form-group">
 	<label>Organization Name</label>
-    <input <?= error_outline($errors, "org_name") ?> type="text" name="org_name" value="<?=show_value($input, "org_name") ?>" required>
+    <input <?= error_outline($errors, "org_name") ?> type="text" name="org_name" value="<?=show_value($input, "org_name") ?>" >
         <?= show_error($errors, "org_name")?>
   </div>
 
 <div class="form-group">
 	<label>First Name</label>
-    <input <?= error_outline($errors, "firstname") ?> type="text" name="firstname" value="<?=show_value($input, "firstname") ?>" required>
+    <input <?= error_outline($errors, "firstname") ?> type="text" name="firstname" value="<?=show_value($input, "firstname") ?>" >
         <?= show_error($errors, "firstname")?>
   </div>
 
   <div class="form-group">
   <label>Last Name</label>
-  <input <?=error_outline($errors, "lastname")?> type="text" name="lastname" value="<?=show_value($input,"lastname")?>" required>
+  <input <?=error_outline($errors, "lastname")?> type="text" name="lastname" value="<?=show_value($input,"lastname")?>" >
     <?= show_error($errors, "lastname")?>
 </div>
 
   <div class="form-group">
   <label>Email</label>
-  <input <?=error_outline($errors, "email")?> type="email" name="email" value="<?=show_value($input,"email")?>" required>
+  <input <?=error_outline($errors, "email")?> type="email" name="email" value="<?=show_value($input,"email")?>">
     <?= show_error($errors, "email")?>
   </div>
 
  <div class="form-group">
   <label>Phone - format: 555-555-5555</label>
-  <input <?=error_outline($errors, "phone")?> type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<?=show_value($input,"phone")?>" required>
+  <input <?=error_outline($errors, "phone")?> type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<?=show_value($input,"phone")?>" >
     <?= show_error($errors, "phone")?>
 </div>
 

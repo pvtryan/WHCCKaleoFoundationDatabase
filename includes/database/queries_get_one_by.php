@@ -81,12 +81,12 @@
             WHERE ProductID = ?
         ";
 
-
         return query_one_no_clean($sql, "s", [$id]);
     }
 
     function get_event_by_id($id){
         $sql = "
+            SELECT
             EventID,
             EventDate,
             EventName,
@@ -243,6 +243,21 @@ function get_product_donated($donationID,$productID){
         AND ProductID = ?
     ";
 
-    return query_one_no_clean($sql, "ss", [$donationID,$productID]);
+    return query_one_no_clean($sql, "ii", [$donationID,$productID]);
 }
+
+function get_organization_id($id){
+    $sql="
+        SELECT 
+            OrganizationID,
+            OrganizationName,
+            Contact_firstname,
+            Contact_lastname,
+            OrganizationPhone,
+            OrganizationEmail
+        From Organization
+    ";
+    return query_one_no_clean($sql, "i", [$id]);
+}
+
 ?>

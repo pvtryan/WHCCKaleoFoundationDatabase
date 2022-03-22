@@ -78,20 +78,20 @@ if(isset($_POST["submit_password"])){
 
 <div class="form-group">
         <label>Enter Old Password</label>
-        <input <?= error_outline($errors,"old_password") ?> type="text" name="old_password" value="<?=show_value($input,"old_password")?>" required>
+        <input <?= error_outline($errors,"old_password") ?> type="text" name="old_password" value="<?=show_value($input,"old_password")?>" >
         <?=show_error($errors, "old_password")?>
 </div>
 
 
 <div class="form-group">
         <label>Enter New Password</label>
-        <input <?= error_outline($errors,"new_password") ?> type="text" name="new_password" value="<?=show_value($input,"new_password")?>" required>
+        <input <?= error_outline($errors,"new_password") ?> type="text" name="new_password" value="<?=show_value($input,"new_password")?>" >
         <?=show_error($errors, "new_password")?>
 </div>
 
 <div class="form-group">
 		<label>Confirm Password</label>
-		<input <?= error_outline($errors,"confirm_password") ?> type="password" name="confirm_password" value="<?= show_value($input,"confirm_password") ?>" required />
+		<input <?= error_outline($errors,"confirm_password") ?> type="password" name="confirm_password" value="<?= show_value($input,"confirm_password") ?>" />
 		<?= show_error($errors,"confirm_password") ?>
 	</div>
 

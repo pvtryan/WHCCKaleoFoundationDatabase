@@ -40,6 +40,24 @@
 		<td><?php $sum = get_sum_quantity();
 			echo $sum["sum_quantity"];?></td>
 	</tr>
+	
+		<tr>
+		<td>Estimated Values of All Donation</td>
+		<td><?php
+			$info = get_info_all();
+
+			echo "$" .$info["total_value"];
+		?>
+		</td>
+	</tr>
+	<tr><td>Total Quantity of Items Donated</td>
+	<td>
+		<?php
+			$info = get_info_all();
+			echo $info["total_quantity"];
+		?>
+	</td>
+	</tr>
 
 
 </table>

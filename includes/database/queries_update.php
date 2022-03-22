@@ -47,11 +47,29 @@
     function update_quantity_donation($quantity,$value,$donationID,$productID){
         $sql="
             UPDATE DonationProducts 
-            SET Quantity = ? Value = ?
+            SET Quantity = ?, Value = ?
             WHERE DonationID = ? AND ProductID = ?
         ";
-        return query($sql,"ii",[$quantity,$value,$donationID,$productID]);
+        return query($sql,"iiii",[$quantity,$value,$donationID,$productID]);
     }
 
+    function update_event($date,$name,$first,$last,$phone,$email,$id){
+        $sql = "
+            UPDATE Event 
+            SET 
+            EventDate = ?, 
+            EventName=?,
+            Contact_firstname=?,
+            Contact_lastname=?,
+            Phone=?,
+            Email=? 
+            WHERE EventID = ?
+        ";
+        return query($sql,"ssssssi",[$date,$name,$first,$last,$phone,$email,$id]);
+    }
+
+    function update_organization(){
+
+    }
 
 ?>

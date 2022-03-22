@@ -83,25 +83,25 @@
 
 <div class="form-group">
         <label>First Name</label>
-        <input <?= error_outline($errors, "first_name") ?> type="text" name="first_name" value="<?=show_value($user, "userFirstName")?>" required>
+        <input <?= error_outline($errors, "first_name") ?> type="text" name="first_name" value="<?=show_value($user, "userFirstName")?>" >
         <?=show_error($errors, "first_name")?>
 </div>
 
 <div class="form-group">
         <label>Last Name</label>
-        <input <?= error_outline($errors, "last_name") ?> type="text" name="last_name" value="<?=show_value($user, "userLastName")?>" required>
+        <input <?= error_outline($errors, "last_name") ?> type="text" name="last_name" value="<?=show_value($user, "userLastName")?>">
         <?=show_error($errors, "userLastName")?>
 </div>
 
 <div class="form-group">
         <label>Username</label>
-        <input <?= error_outline($errors, "username") ?> type="text" name="username" value="<?=show_value($user, "Username")?>" required>
+        <input <?= error_outline($errors, "username") ?> type="text" name="username" value="<?=show_value($user, "Username")?>" >
         <?=show_error($errors, "username")?>
 </div>
 
 <div class="form-group">
         <label>Email</label>
-        <input <?= error_outline($errors, "email") ?> type="email" name="email" value="<?=show_value($user, "Email")?>" required>
+        <input <?= error_outline($errors, "email") ?> type="email" name="email" value="<?=show_value($user, "Email")?>" >
         <?=show_error($errors, "Email")?>
 </div>
 

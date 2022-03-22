@@ -47,18 +47,18 @@
 
             $this->SetFont('Arial', 'B', 35);
 			$this->Cell(80);
-            $this->Cell(25,10,'Donation Report',0,0, 'C');
+            $this->Cell(25,10,'WHCC - Kaleo Donation Report',0,0, 'C');
             $this->Ln();
             $this->SetFont('Arial', 'B', 20);
 
             if(isset($month)){
                $this->Cell(65);
                $this->Write(10,$name["MonthName"]);
-               $this->Write(10,' for '.$year);
+               $this->Write(10,' of '.$year);
             }else if(isset($quarter)){
                 $this->Cell(60);
                 $this->Write(10,$name["QuarterNUM"]);
-                $this->Write(10,' Quarter for '.$year);
+                $this->Write(10,' Quarter of '.$year);
             }else{
                 $this->Cell(80);
                 $this->Write(10,'for '.$year);
@@ -144,7 +144,7 @@
                 }
                 $value = get_value_of_donation($donation["DonationID"]);
                 if($value["total"] == 0){
-                    $this->Cell($w[4],6,'$ 0.00 ',1,0,'R',true);
+                    $this->Cell($w[4],6,'$ 0.00',1,0,'R',true);
                 }else{
                     $this->Cell($w[4],6,'$ ' .$value["total"],1,0,'R',true);
                 }

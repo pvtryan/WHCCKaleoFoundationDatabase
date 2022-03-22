@@ -57,25 +57,25 @@
 <form method="post" class="form">
     <div class = "form-group">
         <label>Product Name</label>
-        <input <?= error_outline($errors,"product_name") ?> type="text" name="product_name" value="<?=show_value($input,"product_name")?>" required>
+        <input <?= error_outline($errors,"product_name") ?> type="text" name="product_name" value="<?=show_value($input,"product_name")?>" >
         <?=show_error($errors, "product_name")?>
     </div>
 
     <div class = "form-group">
         <label>Quantity</label>
-        <input <?= error_outline($errors,"quantity") ?> type="text" name="quantity" value="<?=show_value($input,"quantity")?>" required>
+        <input <?= error_outline($errors,"quantity") ?> type="text" name="quantity" value="<?=show_value($input,"quantity")?>" >
         <?=show_error($errors, "quantity")?>
     </div>
 
     <div class = "form-group">
         <label>Est. Value</label>
-        <input <?= error_outline($errors,"estvalue") ?> type="text" name="estvalue" value="<?=show_value($input,"estvalue")?>" required>
+        <input <?= error_outline($errors,"estvalue") ?> type="text" name="estvalue" value="<?=show_value($input,"estvalue")?>" >
         <?=show_error($errors, "estvalue")?>
     </div>
 
     <div class="form-group">
         <label>Product Units</label>
-        <select <?= error_outline($errors, "productunits") ?> name="productunits" required>
+        <select <?= error_outline($errors, "productunits") ?> name="productunits" >
             <option selected disabled hidden></option>
             <option <?= check_select($input,"productunits", "Cases") ?> value="Cases">Cases</option>
             <option <?= check_select($input,"productunits","Boxes") ?> value="Boxes">Boxes</option>

@@ -40,7 +40,7 @@
 
    
 
-    if(isset($_GET["quantity"])){
+    if(isset($_GET["quantity"]) || isset($_GET["changequantity"])){
         $productID = $_GET["productID"];
         if($_GET["changequantity"]){
             $changequantity = $_GET["changequantity"];
@@ -49,7 +49,7 @@
         }
       
          $product = get_product_by_id($productID);
-        if($_GET["complete"] === 0){
+        if($_GET["complete"] === false){
             $errors["quantity"] = "Quantity Cannot be Empty";
         }  
       
@@ -197,8 +197,15 @@
                 <div class="info-shown-div-links"> 
                    <!--<a class="feature-url" href="user.php?feature=quantity&DonationID=<?=$DonationID ?>&ProductID=<?=$product["ProductID"]?>">Add to Donation</a>-->
 
-                    <!-- Trigger/Open The Modal -->
-<button class="myBtn_multi">Add Donation to <?=$name["name"]?></button>
+                  <!-- Trigger/Open The Modal -->
+<?php 
+        $productused=get_product_donated($DonationID,$product["ProductID"]);
+        
+        
+        if(isset($productused)):?>
+            <h3 style="color:red">Item was Added to Donation.</h3>
+<?php else:?>
+    <button class="myBtn_multi">Add Donation to <?=$name["name"]?></button>
 
 
 <!-- The Modal -->
@@ -220,8 +227,7 @@
         </div>
     </div>
 </div>
-
-
+<?php endif;?>
             </div>
         </td>
         </tr>

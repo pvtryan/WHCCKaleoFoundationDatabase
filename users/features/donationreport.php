@@ -122,7 +122,7 @@
         <div class="modal-header">
         <h3><strong>Products Donated:</strong></h3>
         </div>
-        
+                            
                     <?php $products = get_products_donated_by($donation["DonationID"])?>
                     <?php foreach($products as $product):?>
                             <p><?=$product["ProductName"]?> - $<?=$product["Value"]?></p>

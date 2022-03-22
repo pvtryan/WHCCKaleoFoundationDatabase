@@ -30,7 +30,7 @@
 
             $this->SetFont('Arial', 'B', 35);
 			$this->Cell(80);
-			$this->Cell(30,20,'Donation List',0,0, 'C');
+			$this->Cell(30,20,'WHCC - Kaleo Donation List',0,0, 'C');
 			$this->Ln();
 			$this->SetLineWidth(2);
 			$this->Ln();

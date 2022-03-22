@@ -60,19 +60,19 @@ if(isset($_POST["submit_new_student"])){
 <form method="post" class="form">
     <div class="form-group">
         <label>First Name</label>
-        <input <?= error_outline($errors, "first_name") ?> type="text" name="first_name" value="<?=show_value($input, "first_name")?>" required>
+        <input <?= error_outline($errors, "first_name") ?> type="text" name="first_name" value="<?=show_value($input, "first_name")?>" >
         <?=show_error($errors, "first_name")?>
     </div>
 
     <div class="form-group">
         <label>Last Name</label>
-        <input <?= error_outline($errors, "last_name") ?> type="text" name="last_name" value="<?=show_value($input, "last_name")?>" required>
+        <input <?= error_outline($errors, "last_name") ?> type="text" name="last_name" value="<?=show_value($input, "last_name")?>" >
         <?=show_error($errors, "last_name")?>
     </div>
 
     <div class="form-group">
         <label>Role</label>
-        <select <?= error_outline($errors, "Role") ?> name="Role" id="Role" required>
+        <select <?= error_outline($errors, "Role") ?> name="Role" id="Role" >
             <option selected disabled hidden></option>
             <option <?= check_select($input,"Role", "1") ?> value="1">Admin</option>
             <option <?= check_select($input,"Role","2") ?> value="2">Standard User</option>

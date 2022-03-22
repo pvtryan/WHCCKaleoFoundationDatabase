@@ -68,37 +68,37 @@ if(isset($_POST["submit_new_event"])){
 
 <div class="form-group">
 	<label>Event Name</label>
-    <input <?= error_outline($errors, "event_name") ?> type="text" name="event_name" value="<?=show_value($input, "event_name") ?>" required>
+    <input <?= error_outline($errors, "event_name") ?> type="text" name="event_name" value="<?=show_value($input, "event_name") ?>" >
         <?= show_error($errors, "event_name")?>
   </div>
 
   <div class="form-group">
 	<label>Event Date</label>
-    <input <?= error_outline($errors, "event_date") ?> type="date" name="event_date" value="<?=show_value($input, "event_date") ?>" required>
+    <input <?= error_outline($errors, "event_date") ?> type="date" name="event_date" value="<?=show_value($input, "event_date") ?>" >
         <?= show_error($errors, "event_date")?>
   </div>
 
 <div class="form-group">
 	<label>First Name</label>
-    <input <?= error_outline($errors, "firstname") ?> type="text" name="firstname" value="<?=show_value($input, "firstname") ?>" required>
+    <input <?= error_outline($errors, "firstname") ?> type="text" name="firstname" value="<?=show_value($input, "firstname") ?>" >
         <?= show_error($errors, "firstname")?>
   </div>
 
   <div class="form-group">
   <label>Last Name</label>
-  <input <?=error_outline($errors, "lastname")?> type="text" name="lastname" value="<?=show_value($input,"lastname")?>" required>
+  <input <?=error_outline($errors, "lastname")?> type="text" name="lastname" value="<?=show_value($input,"lastname")?>" >
     <?= show_error($errors, "lastname")?>
 </div>
 
   <div class="form-group">
   <label>Email</label>
-  <input <?=error_outline($errors, "email")?> type="email" name="email" value="<?=show_value($input,"email")?>" required>
+  <input <?=error_outline($errors, "email")?> type="email" name="email" value="<?=show_value($input,"email")?>" >
     <?= show_error($errors, "email")?>
   </div>
 
  <div class="form-group">
   <label>Phone - format: 555-555-5555</label>
-  <input <?=error_outline($errors, "phone")?> type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<?=show_value($input,"phone")?>" required>
+  <input <?=error_outline($errors, "phone")?> type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<?=show_value($input,"phone")?>" >
     <?= show_error($errors, "phone")?>
 </div>
 

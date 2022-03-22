@@ -12,7 +12,8 @@
 <hr>
 <?php if($role === ADMIN || $role === USER): ?>
     <a class="feature-url"  href="user.php?feature=add_event">Add Event</a>
-<?php endif; ?>
+    <a class="feature-url"  href="eventlist.php">Generate PDF</a>
+    <?php endif; ?>
 
 <h3 class='total-count'><?= $pagination->get_total_rows() ?> Event(s)</h3>
 
@@ -68,8 +69,13 @@
                         <p><strong>Contact: </strong><?=$event["full_name"]?></p>
                         <p><strong>Contact Email: </strong><?=$event["Email"]?></p>
                         <p><strong>Contact Phone: </strong><?=$event["Phone"]?></p>
-                  </div>
+                    </div>
+                  <div class="info-shown-div-links">
+                        <a class="feature-url" href="user.php?feature=edit_event&EventID=<?=$event["EventID"]?>">Edit Event</a>
+                        <a class="feature-url" href="">Delete Event</a>
+                    </div>    
                 </div>
+            
             </td>
             </tr>
 

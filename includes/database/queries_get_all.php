@@ -297,6 +297,7 @@ function report_donation(){
         SELECT
             Donation.DonationID, 
             DATE_FORMAT(Donation.DonationDate, '%M %D %Y  - %h:%i:%s') as Date, 
+            DATE_FORMAT(Donation.DonationDate, '%M %D %Y ') as Date2,
             DATE_FORMAT(Donation.DonationDate, '%Y') as Year,
             Donation.EventID, 
             Donation.OrganizationID, 
@@ -307,6 +308,7 @@ function report_donation(){
         ON Donation.OrganizationID = Organization.OrganizationID 
         LEFT OUTER JOIN Event 
         ON Donation.EventID = Event.EventID
+        Order by Year(Donation.DonationDate)
     ";
     return query_many_np($sql);
 }

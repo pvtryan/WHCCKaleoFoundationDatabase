@@ -53,7 +53,7 @@
  
     <div class = "form-group">
         <label>Quantity</label>
-        <input <?= error_outline($errors,"quantity") ?> type="text" name="quantity" value="<?=show_value($product,"quantity")?>" required>
+        <input <?= error_outline($errors,"quantity") ?> type="text" name="quantity" value="<?=show_value($product,"quantity")?>" >
         <?=show_error($errors, "quantity")?>
     </div>
 

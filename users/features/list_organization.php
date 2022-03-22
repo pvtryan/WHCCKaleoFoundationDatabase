@@ -12,6 +12,7 @@ $input = clean_array($_GET);
 <hr>
 <?php if($role === ADMIN || $role === USER): ?>
     <a class="feature-url"  href="user.php?feature=add_organization">Add Org.</a>
+    <a class="feature-url"  href="organizationlist.php">Generate PDF</a>
 <?php endif; ?>
 
 <h3 class='total-count'><?= $pagination->get_total_rows() ?> Organization(s)</h3>
@@ -67,6 +68,10 @@ $input = clean_array($_GET);
                         <p><strong>Contact Email: </strong><?=$organization["OrganizationEmail"]?></p>
                         <p><strong>Contact Phone: </strong><?=$organization["OrganizationPhone"]?></p>
                   </div>
+                  <div class="info-shown-div-links">
+                        <a class="feature-url" href="user.php?feature=edit_organization&OrganizationID={<?=$organization["OrganizationID"]?>}">Edit <?= $organization["OrganizationName"]?></a>
+                        <a class="feature-url">Delete <?= $organization["OrganizationName"]?></a>
+                    </div>
                 </div>
             </td>
             </tr>

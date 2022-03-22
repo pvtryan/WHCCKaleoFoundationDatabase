@@ -4,6 +4,12 @@ $pagination = new Pagination(PAGES_DONATION, $_GET);
 $donations = get_donation($_GET,false,$pagination);
 $input = clean_array($_GET);
 
+if(isset($_GET["delete"])){
+    delete_donation($_GET["delete"]);
+        change_page(link_without("delete"));
+}
+
+
 ?>
 <h1>Kaleo Donation</h1>
 <hr>
@@ -107,7 +113,18 @@ $input = clean_array($_GET);
                     </div>
                     <div class="info-shown-div-links">
                                 <a class="feature-url" href="user.php?feature=donationproduct&DonationID=<?=$donation["DonationID"]?>">Show Products</a>
-                                <a class="feature-url" href="">Delete Donation</a>
+                                <a class="feature-url" onclick="return confirm('Are you sure you want to delete donation <?php
+                                if($donation["EventID"] == NULL){
+                                    echo $donation["org_name"];
+                                }else{
+                                    echo $donation["event_name"];
+                                }?> from any donation')" href="<?=link_without("") . "&delete={$donation["DonationID"]}"?>" >Delete <?php
+                                if($donation["EventID"] == NULL){
+                                    echo $donation["org_name"];
+                                }else{
+                                    echo $donation["event_name"];
+                                }
+                                ?></a>
                      <div>
                 </div>
         </td>
