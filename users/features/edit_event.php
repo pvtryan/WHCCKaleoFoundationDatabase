@@ -73,7 +73,7 @@
 
 <div class="form-group">
 	<label>Event Date</label>
-    <input <?= error_outline($errors, "event_date") ?> type="date" name="event_date" value="<?=show_value($input, "EventDate") ?>" >
+    <input <?= error_outline($errors, "event_date") ?> type="date" name="event_date" value="<?=show_value($event, "EventDate") ?>" >
         <?= show_error($errors, "event_date")?>
   </div>
 

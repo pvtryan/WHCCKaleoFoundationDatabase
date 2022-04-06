@@ -38,7 +38,9 @@
         echo "<h3 style ='color:green'>Product Added</h3>";
     }
 
-   
+   if(isset($_POST["add_donation"])){
+
+   }
 
     if(isset($_GET["quantity"]) || isset($_GET["changequantity"])){
         $productID = $_GET["productID"];
@@ -90,6 +92,7 @@
             }
         }else{
             $errors["quantity"] = "Cannot";
+
         }
     }
 
@@ -172,6 +175,39 @@
 <div class="who">
     <h1>Items available</h1>
 </div>
+
+<form method="post" class="form">
+<div class="form-group">
+    <div class="form-group">   
+    <?=show_error($errors, "productID")?>
+    <label>Products</label>
+        <select <?= error_outline($errors, "productID") ?> name="productID" >
+            <option selected disabled hidden></option>
+            <?php foreach($products as $product):?>
+            <option <?= check_select($input, 'productID',$product["ProductID"]) ?> value="<?=$product["ProductID"]?>"><?= $product["ProductName"]?> - <?=$product["ProductQuantity"]?></option>
+            <?php endforeach;?>
+        </select>
+        <?=show_error($errors, "productID")?>
+    </div>
+    <div class="form-group">
+        <?= show_error($errors, "quantity")?>
+        <input <?= error_outline($errors,"quantity") ?>  type ="number" value="quantity" name="quantity"placeholder="Quantity Of Products" value="<?=show_value($input, "quantity") ?>" >
+            </div>   
+        
+        <input type ="submit" name="submit_donation">
+           
+           
+            </form>
+
+
+
+
+
+
+
+
+
+
 <div class = "div-table">
 <table>
         <tr>
@@ -206,7 +242,7 @@
             <h3 style="color:red">Item was Added to Donation.</h3>
 <?php else:?>
     <button class="myBtn_multi">Add Donation to <?=$name["name"]?></button>
-
+<br>
 
 <!-- The Modal -->
 <div class="modal modal_multi">
@@ -235,3 +271,5 @@
     </table> 
 
 </div>
+<br>
+<br>

@@ -48,7 +48,7 @@
 			global $donations,$stat;
 
             $this->SetFont('Times','B','14');
-	    $this->Cell(40,10,'Inventory List',0,0,'C');
+	    $this->Cell(40,10,'Donation List',0,0,'C');
 	    $this->Ln();
 
         $this->SetFont('Times','',12);

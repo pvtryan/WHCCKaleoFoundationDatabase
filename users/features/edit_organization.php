@@ -43,10 +43,50 @@
     $errors = [];
     $input=[];
 
-   
+   if(isset($_POST["submit_organization"])){
+       $errors = verify_organization($_POST);
+       if(empty($errors)){
+
+       }
+   }
 
 
 ?>
 
 <h1>Edit Organization</h1>
 <hr>
+
+<form method="post" class="form">
+   <div class = "form-group">
+        <label>Organization Name</label>
+        <input <?= error_outline($errors, "OrganizationName") ?> type="text" name="OrganizationName" value="<?=show_value($org, "OrganizationName")?>" >
+        <?=show_error($errors, "EventName")?>
+    </div>
+
+    <div class = "form-group">
+        <label>Contact First Name</label>
+        <input <?= error_outline($errors, "contactfirstname") ?> type="text" name="contactfirstname" value="<?=show_value($org, "Contact_firstname")?>" >
+        <?=show_error($errors, "contactfirstname")?>
+    </div>
+
+    <div class = "form-group">
+        <label>Contact Last Name</label>
+        <input <?= error_outline($errors, "contactlastname") ?> type="text" name="contactlastname" value="<?=show_value($org, "Contact_lastname")?>" >
+        <?=show_error($errors, "contactlastname")?>
+    </div>
+
+    
+    <div class="form-group">
+        <label>Contact Phone</label>
+        <input <?= error_outline($errors, "contactphone") ?> type="text" name="contactphone" value="<?=show_value($org, "OrganizationPhone")?>" >
+        <?=show_error($errors, "contactphone")?>
+    </div>
+
+    <div class="form-group">
+        <label>Contact Email</label>
+        <input <?= error_outline($errors, "contactemail") ?> type="text" name="contactemail" value="<?=show_value($org, "OrganizationEmail")?>" >
+        <?=show_error($errors, "contactemail")?>
+    </div>
+    
+    <input type="submit" name="submit_organization"/>
+</form>

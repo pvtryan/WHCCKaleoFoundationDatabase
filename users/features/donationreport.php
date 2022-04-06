@@ -3,17 +3,19 @@
    
    $year  =  isset($_GET["Year"])? $_GET["Year"] : "";
     if(isset($_GET["Month"])){
+        
         $month = isset($_GET["Month"])? $_GET["Month"] : "";
         $donations=get_donation_by_year_month($year,$month);
         $info = get_info_by_year_month($year,$month);
         $name = get_monthname($month);
     }else if(isset($_GET["Quarter"])){
+    
         $quarter = isset($_GET["Quarter"])? $_GET["Quarter"] : "";
         $donations = get_donation_by_year_quarter($year,$quarter);
         $info = get_info_by_year_quarter($year,$quarter);
         $name = get_quarter($quarter);
     }else{
-       
+        
         $donations = get_donation_by_year($year);
         $info = get_info_by_year($year);
         
@@ -38,6 +40,7 @@
         }else if(isset($_GET["Quarter"])){
             $link = "donationreportpdf.php?Year=" . $year . "&Quarter=" . $quarter;
             echo '<a class="feature-url" href="' . $link . '">Report PDF</a>';
+  
         }else{
 
             $link = "donationreportpdf.php?Year=" . $year;
@@ -45,6 +48,7 @@
         }
 
     ?>
+
 
 
 
@@ -71,11 +75,15 @@
                     }else{
                         echo "$". $info["total_value"];
                  }?></h3>
+
+            <h3> Total Count: <?php $cnt = count_donation($year);
+                echo $cnt["cnt"];
+                ?></h3>
     </div>
 	
     
 <div class = "div-table">
-    <table>
+    <table > 
         <tr>
             <th>ID</th>
             <th>Date Added</th>
@@ -107,6 +115,15 @@
                     <div class="info-shown-div-info">
                       <?php $value= get_donation_value($donation["DonationID"])?>
                         <p><strong>Total Value of Donation:</strong>$ <?=$value["total"]?></p>
+                        <?php
+                            if($donation["EventID"] == NULL){
+                              $name = $donation["org_name"];
+                           }else{
+                               $name  = $donation["event_name"];
+                           }
+                       
+                            $link = "productsperdonation.php?DonationID=" . $donation["DonationID"] ;
+                        echo '<a class="feature-url" href="' . $link .'">Donations For '. $name .' </a>';?>
                         <button class="myBtn_multi">DonationS For <?php 
                             if($donation["EventID"] == NULL){
                                  echo $donation["org_name"];
@@ -141,5 +158,5 @@
 
 </div>
 
-
+<br>
 <br>

@@ -36,7 +36,7 @@
         return query_many($sql,"s", [$id]);
     }
 
-    function get_donation_by_year($year,$search=[],$count = false,$pagination = null){
+    function get_donation_by_year($year){
         $sql = "
         SELECT 
             Donation.DonationID, 
@@ -54,7 +54,9 @@
         $params= [$year];
         $types = "s";
     
-            return query_many($sql, $types, $params);
+   
+            return query_many($sql,$types,$params);
+        
     }
 
     function get_donation_by_year_month($year,$month){
@@ -75,28 +77,32 @@
         $params = [$year,$month];
         $types = "ii";
      
-            return query_many($sql, $types, $params);
+   
+            return query_many($sql,$types,$params);
+       
     }
 
     function get_donation_by_year_quarter($year,$quarter){
         $sql = "
-            SELECT 
-                Donation.DonationID, 
-                DATE_FORMAT(Donation.DonationDate, '%M %D %Y') as Date, 
-                Donation.EventID, Donation.OrganizationID, 
-                Event.EventName as event_name, 
-                Organization.OrganizationName as org_name 
-            FROM Donation 
-            LEFT OUTER JOIN Organization ON 
-                Donation.OrganizationID = Organization.OrganizationID 
-            LEFT OUTER JOIN Event ON Donation.EventID = Event.EventID 
-            WHERE Year(Donation.DonationDate) = ? 
-            AND Quarter(Donation.DonationDate) = ?   
-        ";
+        SELECT 
+            Donation.DonationID, 
+            DATE_FORMAT(Donation.DonationDate, '%M %D %Y') as Date, 
+            Donation.EventID, Donation.OrganizationID, 
+            Event.EventName as event_name, 
+            Organization.OrganizationName as org_name 
+        FROM Donation 
+        LEFT OUTER JOIN Organization ON 
+            Donation.OrganizationID = Organization.OrganizationID 
+        LEFT OUTER JOIN Event ON Donation.EventID = Event.EventID 
+        WHERE Year(Donation.DonationDate) = ? 
+        AND Quarter(Donation.DonationDate) = ?   
+    ";
 
         $params = [$year,$quarter];
         $types = "ii";
+    
        
-            return query_many($sql, $types, $params);
+            return query_many($sql,$types,$params);
+        
     }
 ?>

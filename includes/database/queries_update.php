@@ -68,8 +68,18 @@
         return query($sql,"ssssssi",[$date,$name,$first,$last,$phone,$email,$id]);
     }
 
-    function update_organization(){
-
+    function update_organization($name,$first,$last,$phone,$email,$id){
+        $sql = "
+            Update Organization
+            SET
+                OrganizationName = ?,
+                Contact_firstname = ?,
+                Contact_lastname = ?,
+                OrganizationPhone = ?,
+                OrganizationEmail = ?
+            Where OrganizationID = ?
+        ";
+        return query($sql,"sssssi",["$name,$first,$last,$phone,$email,$id"]);
     }
 
 ?>

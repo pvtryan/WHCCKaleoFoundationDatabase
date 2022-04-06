@@ -80,7 +80,7 @@
             <option <?= check_select($input,"productunits", "Cases") ?> value="Cases">Cases</option>
             <option <?= check_select($input,"productunits","Boxes") ?> value="Boxes">Boxes</option>
             <option <?= check_select($input,"productunits","Pallets") ?> value="Pallets">Pallets</option>
-           
+            <option <?= check_select($input,"productunits","Bags") ?> value="Bags">Bags</option>
         </select>
         <?=show_error($errors, "productunits")?>
     </div>

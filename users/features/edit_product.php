@@ -41,7 +41,7 @@ function validate_product($input){
             $input = clean_array($_POST);
             if(empty($errors)){
                 update_product_info($productID,$_POST["productname"],$_POST["quantity"], $_POST["productunits"],$_POST["estvalue"]);
-                echo "<h3 style='color:green'>". $_POST["productname"] ."</h3>";
+                echo "<h3 style='color:green'>Updated ". $_POST["productname"] ."</h3>";
                 $input = [];
             }
     }
@@ -76,7 +76,7 @@ function validate_product($input){
     
     <div class="form-group">
         <label>Estimated Price per <?=$product["ProductUnit"]?></label>
-        <input <?=error_outline($errors,"estvalue")?> type="text" name="estvalue" value="$<?=show_value($product,"EstValue")?>" >
+        <input <?=error_outline($errors,"estvalue")?> type="text" name="estvalue" value="<?=show_value($product,"EstValue")?>" >
         <?=show_error($errors, "estvalue")?>
         </div>
 

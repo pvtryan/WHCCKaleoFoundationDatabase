@@ -69,7 +69,7 @@ $input = clean_array($_GET);
                         <p><strong>Contact Phone: </strong><?=$organization["OrganizationPhone"]?></p>
                   </div>
                   <div class="info-shown-div-links">
-                        <a class="feature-url" href="user.php?feature=edit_organization&OrganizationID={<?=$organization["OrganizationID"]?>}">Edit <?= $organization["OrganizationName"]?></a>
+                        <a class="feature-url" href="user.php?feature=edit_organization&OrganizationID=<?=$organization["OrganizationID"]?>">Edit <?= $organization["OrganizationName"]?></a>
                         <a class="feature-url">Delete <?= $organization["OrganizationName"]?></a>
                     </div>
                 </div>

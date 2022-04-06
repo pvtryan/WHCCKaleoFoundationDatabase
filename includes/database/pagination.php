@@ -26,14 +26,16 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
   private $current_page;
   private $total_pages;
   private $total_rows;
-  private $id;
+  private $id; 
+  private $id2;
 
-  public function __construct($list_type, $input, $id = -1, $do_default_limit = false){//This function will construct the pagination 
+  public function __construct($list_type, $input, $id = -1,$id2 =-1, $do_default_limit = false){//This function will construct the pagination 
     $this->list_type = $list_type;
     $this->input = $input;
     echo "<script src='js/pagination.js'></script>";
     $this->limit = $do_default_limit? 9 : $this->get_list_limit();
     $this->id = $id;
+    $this->id2= $id2;
     $this->set_total_pages();
     $this->set_current_page();
   }
@@ -78,7 +80,7 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
     return isset($row["cnt"])? (int)$row["cnt"] : 0;
   }
 
-  private function get_count($id = null){//This function directs from what pages will need the records to be counted for the pagination 
+  private function get_count($id = null,$id2 = null){//This function directs from what pages will need the records to be counted for the pagination 
     switch($this->list_type){
       case PAGES_USERS:
         return get_users($_GET, true);
@@ -102,10 +104,10 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
         return get_donation_by_year($this->id,$_GET,true);
         break;
       case PAGES_DONATIONREPORTMONTH:
-        return get_donation_by_year_month($this->id,$this->id,$_GET,true);
+        return get_donation_by_year_month($this->id,$this->id2,$_GET,true);
         break;
       case PAGES_DONATIONREPORTQUARTER:
-        return get_donation_by_year_quarter($this->id,$this->id,$_GET,true);
+        return get_donation_by_year_quarter($this->id,$this->id2,$_GET,true);
         break;
         default:
         return -1;

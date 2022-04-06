@@ -1,6 +1,30 @@
 <?php
  check_user([ADMIN]);
 
+ use PHPMailer\PHPMailer\PHPMailer;
+ use PHPMailer\PHPMailer\Exception;
+ require 'vendor/autoload.php';
+
+
+ $mail = new PHPMailer();
+ $mail->IsSMTP();
+ $mail->Mailer = "smtp";
+
+$serveremail = "apache@ryancox.site";
+$serverpassword = "Cameron#Demons1";
+
+$mail->SMTPDebug  = 2;  
+$mail->SMTPAuth   = TRUE;
+$mail->SMTPSecure = "tls";
+$mail->Port       = 587;
+$mail->Host       = "ssl://smtp.gmail.com";
+$mail->Username   = $serveremail;
+$mail->Password   = $serverpassword;
+
+$mail->IsHTML(true);
+$mail->Subject = "WHCC - Kaleo Inventory system Login Details";
+
+
 function validate_new_user($input){
     $errors = [];
 
@@ -24,6 +48,22 @@ function validate_new_user($input){
         if(!isset($input['Role']) || empty($input["Role"])){
             $errors['Role'] = "Role is incorrect";
         }
+
+
+        if(!isset($input['phone']) || empty($input["phone"])){
+            $errors['phone'] = "Phone is incorrect";
+        }else if(strlen($input['phone']) > 14){
+            $errors['phone'] = "Max 14 characters for Phone";
+        }
+        
+        if(!isset($input['email']) || empty($input['email'])){
+            $errors['email'] = "Email is required";
+        }else if(!filter_var($input['email'], FILTER_VALIDATE_EMAIL)){
+            $errors['email'] = "Email is not Valid";
+        }else if(strlen($input['email']) > 50){
+          $errors['email'] = "Max 50 characters for Email";    
+        }
+        return $errors;
  }
     $input = [];
     $errors = []; 
@@ -33,10 +73,13 @@ if(isset($_POST["submit_new_student"])){
     $input = clean_array($_POST);
     
     if(empty($errors)){
-        $username = generate_username($_POST["first_name"], $_POST["last_name"], STUDENT);
+        $username = generate_username($_POST["first_name"], $_POST["last_name"]);
             $password = generate_random_password();
             $hash_password = PASSWORD_HASH($password, PASSWORD_DEFAULT);
+            
 
+         
+            insert_user($_POST["first_name"], $_POST["last_name"],$username,$hash_password,$_POST["Role"],$_POST["phone"],$_POST["email"]);
             //Insert function to mail password to new user
             //Add Insert when ready
 
@@ -44,9 +87,26 @@ if(isset($_POST["submit_new_student"])){
             
             //$msg = "Username:{$username}\nPassword:{$password}";
 
-            //mail($_POST['email'], "Student Login Information", $msg);
 
-        echo "<h3 style ='color:green'>User Added</h3>";
+           // $mail->AddAddress($_POST["email"], $_POST["first_name"]);
+           // $mail->SetFrom($serveremail, "apache");
+            
+           // $content = "<b>This is a Test Email sent via Gmail SMTP Server using PHP mailer class./nUsername:{}\nPassword={}</b>";
+            //mail($_POST["email"],"LOGIN DETAILS",$content);
+           /* $mail->MsgHTML($content); 
+            if(!$mail->Send()) {
+                echo "Error while sending Email.";
+                var_dump($mail);
+            } else {
+                echo "Email sent successfully";
+            }*/
+
+
+        echo "<h3 style ='color:green'>User Added " .$_POST["first_name"]." </h3><br>";
+        $link = "userdetails.php?username=" .$username . "&password=" .$password;
+        echo '<a style="color:green" href="' .$link. '">Generate User PDF</a>';
+
+
             $input = [];
     }
 
@@ -56,6 +116,11 @@ if(isset($_POST["submit_new_student"])){
 <h1>Add User</h1>
 <hr>
 
+<div class="who">
+    <h1 style="color:red;">Warning!</h1>
+    <h1 style="color:red;">User Username and Password is shown in a generated PDF after addition</h1>
+
+</div>
 
 <form method="post" class="form">
     <div class="form-group">
@@ -70,6 +135,7 @@ if(isset($_POST["submit_new_student"])){
         <?=show_error($errors, "last_name")?>
     </div>
 
+
     <div class="form-group">
         <label>Role</label>
         <select <?= error_outline($errors, "Role") ?> name="Role" id="Role" >
@@ -80,6 +146,18 @@ if(isset($_POST["submit_new_student"])){
            
         </select>
         <?=show_error($errors, "Role")?>
+    </div>
+
+    <div class="form-group">
+        <label>Phone:</label>
+        <input <?= error_outline($errors, "phone") ?> type="text" name="phone" value="<?=show_value($input, "phone")?>" >
+        <?=show_error($errors, "phone")?>
+    </div>
+
+    <div class="form-group">
+        <label>Email:</label>
+        <input <?= error_outline($errors, "email") ?> type="email" name="email" value="<?=show_value($input, "email")?>" >
+        <?=show_error($errors, "email")?>
     </div>
 
     <input type="submit" name="submit_new_student" >

@@ -32,8 +32,8 @@
 
         return $errors;
     }
-
-
+    $errors = [];
+    $input =[];
     if(isset($_POST["submit_new_donation"])){
         $errors = validate_new_donation($_POST);
         $input = clean_array($_POST);

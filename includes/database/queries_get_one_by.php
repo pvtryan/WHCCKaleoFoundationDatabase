@@ -6,6 +6,8 @@
                  UserID,
                  userFirstName,
                  userLastName,
+                 CONCAT(userLastName, ', ', userFirstName) as full_name_rev,
+                 CONCAT( userFirstName,  ' ', userLastName) as full_name,
                  Username,
                  Password,
                  Role,
@@ -58,7 +60,8 @@
         Donation.EventID, 
         Donation.OrganizationID, 
         Event.EventName as event_name, 
-        Organization.OrganizationName as org_name 
+        Organization.OrganizationName as org_name,
+        DATE_FORMAT(Donation.DonationDate, '%M %D %Y') as FormatDate
     FROM Donation 
     LEFT OUTER JOIN Organization 
         ON Donation.OrganizationID = Organization.OrganizationID 
@@ -256,8 +259,31 @@ function get_organization_id($id){
             OrganizationPhone,
             OrganizationEmail
         From Organization
+        Where OrganizationID = ?
     ";
     return query_one_no_clean($sql, "i", [$id]);
 }
 
+function count_donation($year){
+    $sql="
+        Select
+            count(DonationID)as cnt
+        From Donation
+        Where year(DonationDate) = ?
+    ";
+    return query_one_no_clean($sql, "i", [$year]);
+}
+
+function stats_of_donations($donationID){
+    $sql= "
+        SELECT 
+            COUNT(ProductID) as totalcount,
+            SUM(Quantity) as  totalquantity,
+            SUM(Value) as totalvalue
+        FROM DonationProducts
+        WHERE DonationID = ?
+    ";
+
+    return query_one_no_clean($sql, "i",[$donationID]);
+}
 ?>

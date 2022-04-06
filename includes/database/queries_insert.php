@@ -7,12 +7,12 @@
             return query($sql, "sisi",[$ProductName,$ProductQuantity,$ProductUnit,$EstValue]);
     }
 
-    function insert_user($userFirstName,$userLastName,$Username,$Password,$Role,$userEmail){
+    function insert_user($userFirstName,$userLastName,$Username,$Password,$Role,$phone,$userEmail){
         $sql = "
-            INSERT INTO Users(userFirstName,userLastName,Username,Password,Role,userEmail)
-            VALUES(?,?,?,?,?,?);
+            INSERT INTO Users(userFirstName,userLastName,Username,Password,Role,Phone,Email)
+            VALUES(?,?,?,?,?,?,?);
         ";
-        return query($sql,"ssssis", [$userFirstName,$userLastName,$Username,$Password,$Role,$userEmail]);
+        return query($sql,"ssssiss", [$userFirstName,$userLastName,$Username,$Password,$Role,$phone,$userEmail]);
     }
 
 

@@ -7,6 +7,7 @@ TO BE INCLUDED AT THE BOTTOM OF EVERY PAGE, FOR CONSISTENCY
 <script src="js/table.js"></script>
 <script src="js/navbar.js"></script>
 <script src="js/modal.js"></script>
+
 </div>
 </main>
 

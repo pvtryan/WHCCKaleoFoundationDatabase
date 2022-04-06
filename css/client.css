@@ -446,7 +446,7 @@ top: 1px;
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  position: relative; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
@@ -468,7 +468,7 @@ top: 1px;
   margin: auto;
   padding: 10px;
   border: 1px solid #888;
-  width: 80%;
+  width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -514,4 +514,11 @@ top: 1px;
   padding: 2px 16px;
   background-color: var(--header-color);
   color: white;
+}
+
+.modal-body{
+  display:none;
+  position:absolute;
+  top:0;
+  left:0px;
 }

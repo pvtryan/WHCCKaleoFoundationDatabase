@@ -71,6 +71,7 @@
                     <div class="info-shown-div-info">
                            <p><strong>Unit: </strong><?=$product["ProductUnit"]?></p>
                            <p><strong>Estimated Price Per <?=$product["ProductUnit"]?>: $</strong><?=$product["EstValue"]?>.00</p>
+                           <p><strong>Estimated Total Value: $</strong><?=$product["EstValue"] * $product["ProductQuantity"]?>.00</p>
                     </div>
                     <div class="info-shown-div-links">
                         <a class="feature-url" href="user.php?feature=edit_product&ProductID=<?=$product["ProductID"]?>">Edit Product</a>

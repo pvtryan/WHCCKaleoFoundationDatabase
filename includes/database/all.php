@@ -2,7 +2,7 @@
 
 $files = ['connect_variables','connect','queries_get_all',
 'queries_get_many_by','queries_get_one_by','queries_get_one','queries_insert',
-'queries_update','queries_delete','pagination'];
+'queries_update','queries_delete','pagination','register'];
 
 //loops for the file to be loaded in project to be only called once 
 foreach($files as $file){

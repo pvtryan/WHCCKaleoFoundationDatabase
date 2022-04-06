@@ -14,7 +14,7 @@ if(isset($_GET["delete"])){
 <h1>Kaleo Donation</h1>
 <hr>
 
-    <a class = "feature-url" href="user.php?feature=add_donation">Add Donation</a>
+    <a class = "feature-url" href="user.php?feature=add_donation">Add Donation </a>
     <a class="feature-url"  href="donationlist.php">Generate PDF</a>
     <h3 class='total-count'><?= $pagination->get_total_rows() ?> DONATION(s)</h3>
 
