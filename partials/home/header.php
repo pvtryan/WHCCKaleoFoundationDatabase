@@ -4,10 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/input.css">
+
     <title>Kaleo</title>
 </head>
 <body>
-
+<div id="loader"></div>
         <header class="header">
             <div class="mainlinks">
                 <a class="mainlink" href="index.php">Home</a>

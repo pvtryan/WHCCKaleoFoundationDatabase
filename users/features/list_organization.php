@@ -5,6 +5,10 @@ $pagination = new Pagination(PAGES_ORGANIZATION, $_GET);
 $organizations = get_organizations($_GET,false,$pagination);
 $input = clean_array($_GET);
 
+if(isset($_GET["delete"])){
+    delete_organization($_GET["delete"]);
+    change_page('user.php?feature=list_organization');
+}
 
 ?>
 
@@ -70,7 +74,11 @@ $input = clean_array($_GET);
                   </div>
                   <div class="info-shown-div-links">
                         <a class="feature-url" href="user.php?feature=edit_organization&OrganizationID=<?=$organization["OrganizationID"]?>">Edit <?= $organization["OrganizationName"]?></a>
-                        <a class="feature-url">Delete <?= $organization["OrganizationName"]?></a>
+                        <?php if(can_org_be_delete($organization["OrganizationID"])):?>
+                        <a onclick="return confirm('Are you Sure you want to Delete <?= $organization['OrganizationName']?>?')" class="feature-url" href="user.php?feature=list_organization&delete=<?=$organization["OrganizationID"] ?>">Delete <?= $organization["OrganizationName"]?></a>
+                        <?php else:?>
+                            <p class = "error">Organization is already being used and Cannot be deleted.</p> 
+                        <?php endif?>
                     </div>
                 </div>
             </td>
@@ -79,4 +87,4 @@ $input = clean_array($_GET);
     </table>
 </div>
 <?php $pagination->print_all_links() ?>
-<br>
+<br> 

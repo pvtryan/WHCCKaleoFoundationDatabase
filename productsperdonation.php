@@ -31,29 +31,52 @@
         }
         
         function Header(){
-            global $products,$info;
+            global $products,$info,$stat;
 
             $this->SetFont('Arial', 'B', 35);
 			$this->Cell(80);
 			$this->Cell(30,20,'WHCC - Kaleo Donation List',0,0, 'C');
 			$this->Ln();
             $this->SetFont('Arial', 'B', 15);
-            $this->Cell(30);
+           //$this->Cell(20);
         
             if($info["event_name"] == NULL){
-                $this->Write(10,$info["org_name"]);
+                $this->Cell(0,10,$info["org_name"] .' Added On ' .$info["FormatDate"] ,0,0,'C');
             }else{
-               $this->Write(10,$info["event_name"]);
+                $this->Cell(0,10,$info["event_name"] .' Added On ' .$info["FormatDate"] ,0,0,'C');
             
             }
-            $this->Write(10,'Added On '.$info["FormatDate"]);
-           
+        
+        
             $this->Ln();
             $this->SetFont('Arial', 'B', 20);
             
             $this->SetLineWidth(2);
 			$this->Ln();
 			$this->Line(10,40,$this->getPageWidth()-10,40);
+            $this->Ln();
+
+                
+            $this->SetFont('Times','',12);
+	        $this->SetLineWidth(.3);
+            $this->headercolor();
+            $this->Cell(45,7,'Total # of All Products: ',1,0,'C',true);
+            $this-> cellnocolor();
+            $this->Cell(35,7,$stat["totalcount"],1,0,'R',true);
+            $this->cellnocolor();
+            $this->Ln();
+            $this->headercolor();
+            $this->Cell(45,7,'Total Quantity: ',1,0,'C',true);
+            $this-> cellnocolor();
+            $this->Cell(35,7,$stat["totalquantity"],1,0,'R',true);
+            $this->cellnocolor();
+            $this->Ln();
+            $this->headercolor();
+            $this->Cell(45,7,'Total Value: ',1,0,'C',true);
+            $this-> cellnocolor();
+            $this->Cell(35,7,'$ '.$stat["totalvalue"]. '.00',1,0,'R',true);
+            $this->cellnocolor();
+
         }
 
         function Footer(){
@@ -67,34 +90,13 @@
 			global $products,$stat;
 
             $this->SetFont('Times','B','14');
-	    $this->Cell(40,10,'Donation List',0,0,'C');
 	    $this->Ln();
-
-        $this->SetFont('Times','',12);
-	    $this->SetLineWidth(.3);
-        $this->headercolor();
-        $this->Cell(45,7,'Total # of All Products: ',1,0,'C',true);
-        $this-> cellnocolor();
-        $this->Cell(35,7,$stat["totalcount"],1,0,'R',true);
-        $this->cellnocolor();
         $this->Ln();
-        $this->headercolor();
-        $this->Cell(45,7,'Total Quantity: ',1,0,'C',true);
-        $this-> cellnocolor();
-        $this->Cell(35,7,$stat["totalquantity"],1,0,'R',true);
-        $this->cellnocolor();
-        $this->Ln();
-        $this->headercolor();
-        $this->Cell(45,7,'Total Value: ',1,0,'C',true);
-        $this-> cellnocolor();
-        $this->Cell(35,7,'$ '.$stat["totalvalue"]. '.00',1,0,'R',true);
-        $this->cellnocolor();
+        $this->Cell(40,10,'Donation List',0,0,'C');
 
-
-        $this->Ln();
         $this->Ln();
         $this->headercolor();//sets cell color to blue for header
-	
+        $this->SetFont('Times','',12);
 	    //width columns
 	    $w = array(20,60,35,35);
 	    //Header

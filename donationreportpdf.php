@@ -70,8 +70,11 @@
 			$this->Ln();
 			$this->Line(10,40,$this->getPageWidth()-10,40);
             $this->Ln();
-            $this->SetFont('Times','',12);
-            $this->SetLineWidth(.3);
+           
+
+            $this->SetFont('Times','','14');
+	      
+	        $this->SetLineWidth(.3);
             $this->headercolor();
             $this->Cell(45,7, 'Total # of All Products:',1,0,'L',true);
             $this->cellnocolor();
@@ -87,6 +90,7 @@
             $this->cellnocolor();
             $this->Cell(35,7,'$ '.$info["total_value"],1,0,'R',true);
             $this->Ln();
+	      
         }
 
         function Footer(){
@@ -98,10 +102,14 @@
 
 
         function report($header,$data){
-            global $donations,$year,$info;
+            global $donations,$year,$info,$name,$month,$quarter;
             
+
+         
+	      
+           
             $this->SetFont('Times','B','14');
-	        $this->Cell(40,10,'Donation List',0,0,'C');
+            $this->Cell(40,10,'Donation List',0,0,'C');
 	        $this->Ln();
 	
     	    $this->SetFont('Times','',12);

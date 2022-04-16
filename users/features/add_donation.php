@@ -4,6 +4,18 @@
     $events = get_events();
     $orgs = get_organizations();
 
+    function get_next_donation(){
+        $sql="
+            SELECT AUTO_INCREMENT 
+            FROM information_schema.TABLES 
+            WHERE TABLE_SCHEMA = 'kaleo' 
+            AND TABLE_NAME = 'Donation'
+  
+        ";
+        $result = query_one_np($sql);
+	return $result;
+    }
+
     function validate_new_donation($input){
         if ($input['event'] === '') {
             $input['event'] = null; // or 'NULL' for SQL
@@ -47,11 +59,20 @@
             }
             if($_POST['org'] === null){
                 insert_donation_event($_POST["event"]);
+                $event = get_event_by_id($_POST["event"]);
+                $name = $event["EventName"];
+
             }else if($_POST['event'] === null){
-                insert_donation_org($_POST["org"]);   
+                insert_donation_org($_POST["org"]); 
+                $org = get_organization_id($_POST["org"]);
+                $name = $org["OrganizationName"];
             }
            
+            $next = get_next_donation();
+             $current = $next["AUTO_INCREMENT"] - 1;
+           
             echo "<h3 style ='color:green'>Donation Added</h3>";
+            echo "<a style ='color:green' href='user.php?feature=add_productdonation&DonationID=". $current ."'>Click Here to Add to ".$name."</a>";
             $input = [];
         }
     }

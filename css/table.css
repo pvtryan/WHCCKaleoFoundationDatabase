@@ -3,12 +3,8 @@ THIS PAGE IS FOR THE STYLING OF ALL OF THE TABLES IN THE WEBSITE
 */
 
 .div-table {
-    overflow-x: auto;
-    width: 100%;
-    overflow-y:scroll;
-   height:100%;
-   display:block;
-   position: sticky;
+  overflow-x: auto;
+  width: 100%;
   }
   
   @media (max-width: 700px) {
@@ -202,27 +198,4 @@ THIS PAGE IS FOR THE STYLING OF ALL OF THE TABLES IN THE WEBSITE
     }
   }
 
-  .tableFixHead {
-    width: 500px;
-    table-layout: fixed;
-    border-collapse: collapse;
-    border: 1px solid black;
-    background-color: var(--lightest-yellow);
-  }
-    .tableFixHead tbody {
-    display: block;
-    width: 100%;
-    overflow: auto;
-    height: 50px;
-  }
-  .tableFixHead thead tr {
-    display: block;
-  }
-  .tableFixHead th,
-  .tableFixHead  td {
-    padding: 5px 10px;
-    width: 200px;
-  }
-  th {
-    background: #ABDD93;
-  }
+ 

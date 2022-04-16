@@ -46,6 +46,8 @@ if(isset($_POST["submit_login"])){
         login_user($_POST);
         $username = get_user_by_username($_POST["username"]);
         insert_logindate($username["UserID"],$ip);
+        sleep(4);
+        
         change_page('user.php');
     }
     $input = clean_array($_POST);
@@ -59,10 +61,15 @@ if(isset($_POST["submit_login"])){
 	LOGIN FORM
 	includes username, password, and role as input
 -->
-<div class="form__login login">
-    <?= show_error($errors,"login") ?>
 
+
+<div id="myDiv">
+<div class="form__login login">
+ 
+    <?= show_error($errors,"login") ?>
+    
     <h1>Login</h1>
+
     <form action="<?= action() ?>" method="POST">
 
         <div class="container__input">
@@ -76,13 +83,16 @@ if(isset($_POST["submit_login"])){
         </div>
 
       
-        <input type="submit" name="submit_login" value="Login">
+        <input type="submit" onclick="Start()" name="submit_login" value="Login">
         
     </form>
 </div>
+</div>
+
 
 <script>
 document.querySelector('input').focus();
 </script>
 
 <?php require_once("partials/home/footer.php") ?>
+

@@ -35,7 +35,7 @@ function Header(){
 	$this->Ln();
 
     $this->SetFont('Arial','B', 35);
-	$this->Cell($this->getPageWidth()-20,45,'WHCC - Kaleo Inventory List',0,0,'C');
+	$this->Cell($this->getPageWidth()-20,45,'WHCC - Kaleo All Events',0,0,'C');
 	$this->SetLineWidth(2);
 	$this->Line(10,40,$this->getPageWidth()-10,40);
 	$this->Ln();

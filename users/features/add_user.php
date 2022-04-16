@@ -1,28 +1,7 @@
 <?php
  check_user([ADMIN]);
 
- use PHPMailer\PHPMailer\PHPMailer;
- use PHPMailer\PHPMailer\Exception;
- require 'vendor/autoload.php';
-
-
- $mail = new PHPMailer();
- $mail->IsSMTP();
- $mail->Mailer = "smtp";
-
-$serveremail = "apache@ryancox.site";
-$serverpassword = "Cameron#Demons1";
-
-$mail->SMTPDebug  = 2;  
-$mail->SMTPAuth   = TRUE;
-$mail->SMTPSecure = "tls";
-$mail->Port       = 587;
-$mail->Host       = "ssl://smtp.gmail.com";
-$mail->Username   = $serveremail;
-$mail->Password   = $serverpassword;
-
-$mail->IsHTML(true);
-$mail->Subject = "WHCC - Kaleo Inventory system Login Details";
+ 
 
 
 function validate_new_user($input){
@@ -80,27 +59,7 @@ if(isset($_POST["submit_new_student"])){
 
          
             insert_user($_POST["first_name"], $_POST["last_name"],$username,$hash_password,$_POST["Role"],$_POST["phone"],$_POST["email"]);
-            //Insert function to mail password to new user
-            //Add Insert when ready
-
-            //insert_user($_POST["first_name"], $_POST["last_name"];
-            
-            //$msg = "Username:{$username}\nPassword:{$password}";
-
-
-           // $mail->AddAddress($_POST["email"], $_POST["first_name"]);
-           // $mail->SetFrom($serveremail, "apache");
-            
-           // $content = "<b>This is a Test Email sent via Gmail SMTP Server using PHP mailer class./nUsername:{}\nPassword={}</b>";
-            //mail($_POST["email"],"LOGIN DETAILS",$content);
-           /* $mail->MsgHTML($content); 
-            if(!$mail->Send()) {
-                echo "Error while sending Email.";
-                var_dump($mail);
-            } else {
-                echo "Email sent successfully";
-            }*/
-
+           
 
         echo "<h3 style ='color:green'>User Added " .$_POST["first_name"]." </h3><br>";
         $link = "userdetails.php?username=" .$username . "&password=" .$password;

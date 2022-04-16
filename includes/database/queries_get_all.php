@@ -61,8 +61,9 @@ function get_users($search = [],$count = false, $pagination = null){
     }
 
 function get_products($search = [],$count = false,$pagination = null){
- 
+    $name = "%";
     $name = isset($search["name"]) && !empty($search["name"]) ? $search["name"] : "%";
+    $name .= "%";
     $id = isset($search["id"]) && !empty($search["id"]) ? $search["id"] : "%";
     $orderby = "ORDER BY ProductName, ProductID ";
 
@@ -119,7 +120,9 @@ function get_sum_quantity(){
 }
 
 function get_organizations($search = [],$count = false, $pagination = null){
+    $name = "%";
     $name = isset($search["name"]) && !empty($search["name"]) ? $search["name"] : "%";
+    $name .= "%";
     $id = isset($search["id"]) && !empty($search["id"]) ? $search["id"] : "%";
     $orderby = "ORDER BY OrganizationName, OrganizationID ";
 
@@ -162,7 +165,9 @@ function get_organizations($search = [],$count = false, $pagination = null){
 }
 
 function get_events($search=[],$count = false,$pagination = null){
+    $name = "%";
     $name = isset($search["name"]) && !empty($search["name"]) ? $search["name"] : "%";
+    $name .= "%";
     $id = isset($search["id"]) && !empty($search["id"]) ? $search["id"] : "%";
     $orderby = "ORDER BY  EventName, EventID ";
 
@@ -209,8 +214,12 @@ function get_events($search=[],$count = false,$pagination = null){
 
 function get_donation($search = [],$count = false, $pagination = null){
     $id = isset($search["id"]) && !empty($search["id"]) ? $search["id"] : "%";
+    $event = '%';
     $event = isset($search["event"]) && !empty($search["event"]) ? $search["event"] : "%";
+    $event .= '%';
+    $org = '%';
     $org = isset($search["org"]) && !empty($search["org"]) ? $search["org"] : "%";
+    $org .= '%';
     $orderby = "ORDER BY Donation.DonationID";
 
    
@@ -314,8 +323,9 @@ function report_donation(){
 }
 
 function report_year($search=[],$count = false,$pagination = null){
-    
+    $year = "%";
     $year = isset($search["year"]) && !empty($search["year"]) ? $search["year"] : "%";
+    $year .= "%";
     $orderby = "ORDER BY Year(DonationDate) ASC";
 
    
@@ -335,11 +345,12 @@ function report_year($search=[],$count = false,$pagination = null){
         Select Distinct 
             Year(DonationDate) as Year
         From Donation
+        Where Year(DonationDate) Like ?
         {$orderby}
     ";
   
-    $types = [$year];
-    $params = "s";
+    $params= [$year];
+    $types = "s";
     if ($count)
         return Pagination::get_count_query($sql, $types, $params);
     else if ($pagination !== null)
@@ -399,5 +410,29 @@ function getall_donationvalue_quantity(){
     return query_one_np($sql);
 }
 
-
+function get_products_not_empty($search=[],$count = false,$pagination = null){
+    $name = "%";
+    $name = isset($search["name"]) && !empty($search["name"]) ? $search["name"] : "%";
+    $name .= "%";
+    
+    $sql="
+    SELECT 
+        ProductID,
+        ProductName,
+        ProductQuantity,
+        ProductUnit,
+        EstValue
+    From Product
+    WHERE ProductQuantity != 0 
+    ";
+    
+    $params= [$year];
+    $types = "s";
+    if ($count)
+        return Pagination::get_count_query($sql, $types, $params);
+    else if ($pagination !== null)
+        return $pagination->get_pagination_query($sql, $types, $params);
+    else
+        return query_many($sql, $types, $params);
+}
 ?>  

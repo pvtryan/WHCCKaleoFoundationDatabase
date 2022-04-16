@@ -5,7 +5,10 @@
     $events = get_events($_GET,false, $pagination);
     $input = clean_array($_GET);
 
-
+    if(isset($_GET["delete"])){
+        delete_event($_GET["delete"]);
+        change_page('user.php?feature=list_event');
+    }
 
 ?>
 <h1>Events</h1>
@@ -72,8 +75,14 @@
                     </div>
                   <div class="info-shown-div-links">
                         <a class="feature-url" href="user.php?feature=edit_event&EventID=<?=$event["EventID"]?>">Edit Event</a>
-                        <a class="feature-url" href="">Delete Event</a>
-                    </div>    
+                        <?php if(can_event_be_delete($event["EventID"])):?>
+                        
+                        <a onclick="return confirm('Are you Sure you want to Delete <?= $Event['EventName']?>?')" class="feature-url" href="user.php?feature=list_event&delete=<?=$event["EventID"] ?>">Delete <?= $Event["EventName"]?></a>
+                    
+                        <?php else:?>
+                                <p class= 'error'>Events is already being used and Cannot be deleted.</p>
+                        <?php endif?>
+                        </div>    
                 </div>
             
             </td>

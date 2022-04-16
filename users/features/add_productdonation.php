@@ -4,18 +4,21 @@
     $DonationID  =  isset($_GET["DonationID"])? $_GET["DonationID"] : "";
     $name = get_rec_name_by_id($DonationID);
     $donated = get_products_donated_by($DonationID);
-    $products = get_products();
+    
+    $pagination = new Pagination(PAGES_INVENTORYADD, $_GET);
+    $products = get_products_not_empty($_GET,false,$pagination);
     $inputs = [];
     $errors = [];
-  /*  if($_GET["complete"] === true){
+    $completed = isset($_GET["complete"])? $_GET["complete"] : "";
+    if($completed === 'true'){
         echo "<h3 style ='color:green'>Product Added</h3>";
     }
 
-    if($_GET["complete"] === false){
-        echo "<h3 style='color:red'>Quantity Cannot be Empty</h3>";
+    if($_GET["complete_delete"]=== 'true'){
+        echo "<h3 style ='color:green'>Product Deleted</h3>";
     }
 
-*/
+
     if(isset($_POST["submit_donation"])){
         if ($_POST['newquantity'] === '') {
     
@@ -34,11 +37,20 @@
         }
     }
 
-    if($_GET["complete"] === true){
-        echo "<h3 style ='color:green'>Product Added</h3>";
-    }
+ 
 
    if(isset($_POST["add_donation"])){
+
+   }
+
+   if(isset($_GET["delete"])){
+         $remove = get_product_donated($DonationID,$_GET["delete"]);
+         $product = get_product_by_id($_GET["delete"]);
+        
+         $quantity = $remove["Quantity"] + $product["ProductQuantity"];
+         update_product_quantity($_GET["delete"],$quantity);
+         delete_donation_product($DonationID,$_GET["delete"]);
+         change_page("user.php?feature=add_productdonation&DonationID={$DonationID}&complete_delete=true");
 
    }
 
@@ -51,7 +63,7 @@
         }
       
          $product = get_product_by_id($productID);
-        if($_GET["complete"] === false){
+        if($_GET["complete"] === 'false'){
             $errors["quantity"] = "Quantity Cannot be Empty";
         }  
       
@@ -105,7 +117,7 @@
 
 ?>
 
-<h1>Add Products to Donation</h1>
+<h1>Add Products to <?=$name["name"]?></h1>
 <hr>
 <div class="who">
     <h1>Items Added to Donation</h1>
@@ -132,6 +144,7 @@
                   
                 </div>
                 <div class="info-shown-div-links">
+                <a onclick="return confirm('Are You Sure you want to Remove <?=$donate['ProductName']?>')" class='feature-url' href="user.php?feature=add_productdonation&DonationID=<?=$DonationID?>&delete=<?= $donate['ID'] ?>">Remove <?=$donate["ProductName"]?></a>
                 <button class="myBtn_multi">Change Quantity</button>
 
 
@@ -173,35 +186,12 @@
 </div>
 
 <div class="who">
-    <h1>Items available</h1>
+    <h1><?= $pagination->get_total_rows() ?> Items available</h1>
 </div>
 
-<form method="post" class="form">
-<div class="form-group">
-    <div class="form-group">   
-    <?=show_error($errors, "productID")?>
-    <label>Products</label>
-        <select <?= error_outline($errors, "productID") ?> name="productID" >
-            <option selected disabled hidden></option>
-            <?php foreach($products as $product):?>
-            <option <?= check_select($input, 'productID',$product["ProductID"]) ?> value="<?=$product["ProductID"]?>"><?= $product["ProductName"]?> - <?=$product["ProductQuantity"]?></option>
-            <?php endforeach;?>
-        </select>
-        <?=show_error($errors, "productID")?>
-    </div>
-    <div class="form-group">
-        <?= show_error($errors, "quantity")?>
-        <input <?= error_outline($errors,"quantity") ?>  type ="number" value="quantity" name="quantity"placeholder="Quantity Of Products" value="<?=show_value($input, "quantity") ?>" >
-            </div>   
-        
-        <input type ="submit" name="submit_donation">
-           
-           
-            </form>
 
 
-
-
+<?php/* Option for Selection instead of table*/?>
 
 
 
@@ -271,5 +261,7 @@
     </table> 
 
 </div>
+
+<?php  $pagination->print_all_links() ?>
 <br>
 <br>

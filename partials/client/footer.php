@@ -7,7 +7,7 @@ TO BE INCLUDED AT THE BOTTOM OF EVERY PAGE, FOR CONSISTENCY
 <script src="js/table.js"></script>
 <script src="js/navbar.js"></script>
 <script src="js/modal.js"></script>
-
+<script src="js/loader.js"></script>
 </div>
 </main>
 
@@ -18,5 +18,6 @@ TO BE INCLUDED AT THE BOTTOM OF EVERY PAGE, FOR CONSISTENCY
         <div class="mainlinks">
         </div>
 </footer>
+
 </body>
 </html>

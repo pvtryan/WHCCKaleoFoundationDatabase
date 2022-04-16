@@ -18,6 +18,7 @@ define('PAGES_REPORT',5);
 define('PAGES_DONATIONREPORTYEAR',6);
 define('PAGES_DONATIONREPORTMONTH',7);
 define('PAGES_DONATIONREPORTQUARTER',8);
+define('PAGES_INVENTORYADD',9);
 
 class Pagination{//Thisclass for the pagination for the list pages to limit amount of rows per page 
   private $list_type;
@@ -109,6 +110,9 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
       case PAGES_DONATIONREPORTQUARTER:
         return get_donation_by_year_quarter($this->id,$this->id2,$_GET,true);
         break;
+      case PAGES_INVENTORYADD:
+        return get_products_not_empty($_GET,true);
+        break;
         default:
         return -1;
     }
@@ -131,6 +135,7 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
     if($page === $this->current_page){
       return "<span class='pagination-link'>{$page}</span>";
     }
+    
     $href = "user.php?";
     $params = [];
     foreach($this->input as $key=>$value){
@@ -142,11 +147,59 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
     $link = "<a class='pagination-link' href={$href}>{$page}</a>";
     return $link;
   }
+
+  public function print_next_link(){
+    
+    if($this->current_page == $this->total_pages){
+      echo "<a class='pagination-link'>></a>";
+
+    }else{
+      $page = $this->current_page;
+
+      $page++;
+      
+      $href = "user.php?";
+      $params = [];
+      foreach($this->input as $key=>$value){
+        if($key !== "page")
+          $params[] = $key . "=" . $value;
+      }
+      $params[] = "page={$page}";
+      $href .= implode($params,"&");
+      echo "<a class='pagination-link' href={$href}>></a>";
+      
+    }
+
+  }
+  public function print_back_link(){
+  
+    if($this->current_page == 1){
+      echo "<a class='pagination-link'><</a>";
+
+    }else{
+      $page = $this->current_page;
+
+      $page--;
+      
+      $href = "user.php?";
+      $params = [];
+      foreach($this->input as $key=>$value){
+        if($key !== "page")
+          $params[] = $key . "=" . $value;
+      }
+      $params[] = "page={$page}";
+      $href .= implode($params,"&");
+      echo "<a class='pagination-link' href={$href}><</a>";
+    }
+  }
+
   public function print_all_links(){//This function is used to print out all links of each page in the pagination 
     echo "<div class='pagination'>";
+    $this->print_back_link();
     for($i=1;$i<=$this->total_pages;$i++){
       echo $this->get_one_link($i);
     }
+    $this->print_next_link();
     echo "</div>";
   }
 }

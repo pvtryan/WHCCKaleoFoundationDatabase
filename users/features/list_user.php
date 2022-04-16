@@ -1,6 +1,8 @@
 <?php
     check_user([ADMIN]);
+    
 
+    
     $pagination = new Pagination(PAGES_USERS, $_GET);
     $users = get_users($_GET,false,$pagination);
 
@@ -103,7 +105,12 @@
                     <p><strong>Email: </strong><?=$user["Email"]?></p>
                     </div>
                     <div class="info-shown-div-links">
-                                <a class="feature-url" href="user.php?feature=edit_user&UserID=<?=$user["UserID"]?>">Edit Info</a>
+                                <?php if($user["UserID"] == $_SESSION["id"]):?>
+                                        <p class="error">User Cannot Edit From this Page </p>
+                                <?php else: ?>
+                                    <a class="feature-url" href="user.php?feature=edit_user&UserID=<?=$user["UserID"]?>">Edit Info</a>
+                                    
+                                    <?php endif;?>
                                 <a class="feature-url" href="">Delete User</a>
                      <div>
                 </div>

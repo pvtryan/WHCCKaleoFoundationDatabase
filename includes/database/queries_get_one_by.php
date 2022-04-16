@@ -79,7 +79,8 @@
                 ProductName,
                 ProductQuantity,
                 ProductUnit,
-                EstValue
+                EstValue,
+                IF(ProductUnit = 'Boxes', 'Box', TRIM(TRAILING 's' FROM ProductUnit)) as shortUnit
             From Product
             WHERE ProductID = ?
         ";
@@ -239,6 +240,8 @@ LEFT OUTER JOIN Event
 function get_product_donated($donationID,$productID){
     $sql = "
         SELECT 
+        DonationID,
+        ProductID,
         Quantity,
         Value
         FROM DonationProducts 
@@ -264,7 +267,7 @@ function get_organization_id($id){
     return query_one_no_clean($sql, "i", [$id]);
 }
 
-function count_donation($year){
+function count_donation_year($year){
     $sql="
         Select
             count(DonationID)as cnt
@@ -272,6 +275,28 @@ function count_donation($year){
         Where year(DonationDate) = ?
     ";
     return query_one_no_clean($sql, "i", [$year]);
+}
+
+function count_donation_year_month($year,$month){
+    $sql="
+    Select
+        count(DonationID)as cnt
+    From Donation
+    Where year(DonationDate) = ?
+    AND Month(DonationDate) = ?
+";
+return query_one_no_clean($sql, "ii", [$year,$month]);
+}
+
+function count_donation_year_quarter($year,$quarter){
+    $sql="
+    Select
+        count(DonationID)as cnt
+    From Donation
+    Where year(DonationDate) = ?
+    AND Quarter(DonationDate) = ?
+";
+return query_one_no_clean($sql, "ii", [$year,$quarter]);
 }
 
 function stats_of_donations($donationID){
@@ -286,4 +311,5 @@ function stats_of_donations($donationID){
 
     return query_one_no_clean($sql, "i",[$donationID]);
 }
+
 ?>

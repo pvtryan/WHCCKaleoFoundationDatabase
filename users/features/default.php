@@ -1,4 +1,5 @@
 
+
 <h1>Welcome, <?= get_current_user_name() ?></h1>
 <hr>
 <div class='info-table'>
@@ -63,4 +64,5 @@
 </table>
 
 <?php endif ?>
-</div>
+
+	</div>

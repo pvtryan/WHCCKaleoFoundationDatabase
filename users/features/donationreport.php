@@ -3,20 +3,20 @@
    
    $year  =  isset($_GET["Year"])? $_GET["Year"] : "";
     if(isset($_GET["Month"])){
-        
+        $pagination = new Pagination(PAGES_DONATIONREPORTMONTH, $_GET,$year,$_GET["Month"]);
         $month = isset($_GET["Month"])? $_GET["Month"] : "";
         $donations=get_donation_by_year_month($year,$month);
         $info = get_info_by_year_month($year,$month);
         $name = get_monthname($month);
     }else if(isset($_GET["Quarter"])){
-    
+        $pagination = new Pagination(PAGES_DONATIONREPORTQUARTER, $_GET,$year,$_GET["Quarter"]);
         $quarter = isset($_GET["Quarter"])? $_GET["Quarter"] : "";
         $donations = get_donation_by_year_quarter($year,$quarter);
         $info = get_info_by_year_quarter($year,$quarter);
         $name = get_quarter($quarter);
     }else{
-        
-        $donations = get_donation_by_year($year);
+        $pagination = new Pagination(PAGES_DONATIONREPORTYEAR, $_GET,$year);
+        $donations = get_donation_by_year($year,$_GET,false,$pagination);
         $info = get_info_by_year($year);
         
     }
@@ -45,11 +45,12 @@
 
             $link = "donationreportpdf.php?Year=" . $year;
             echo '<a class="feature-url" href="' . $link . '">Report PDF</a>';
+            
         }
 
     ?>
 
-
+<h3 class='total-count'><?=$pagination->get_total_rows()?> Item(s)</h3>
 
 
   <div class="who">
@@ -76,7 +77,16 @@
                         echo "$". $info["total_value"];
                  }?></h3>
 
-            <h3> Total Count: <?php $cnt = count_donation($year);
+            <h3> Total Count: <?php 
+                 $cnt;
+                 if(isset($_GET["Month"])){
+                    $cnt = count_donation_year_month($year,$month);
+                }else if(isset($_GET["Quarter"])){
+                    $cnt = count_donation_year_quarter($year,$quarter);
+                }else{
+                    $cnt = count_donation_year($year);
+                }   
+
                 echo $cnt["cnt"];
                 ?></h3>
     </div>
@@ -157,6 +167,6 @@
     </table>
 
 </div>
-
+<?php $pagination->print_all_links() ?>
 <br>
 <br>
