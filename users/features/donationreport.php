@@ -5,13 +5,14 @@
     if(isset($_GET["Month"])){
         $pagination = new Pagination(PAGES_DONATIONREPORTMONTH, $_GET,$year,$_GET["Month"]);
         $month = isset($_GET["Month"])? $_GET["Month"] : "";
-        $donations=get_donation_by_year_month($year,$month);
+        $donations=get_donation_by_year_month($year,$month,$_GET,false,$pagination);
         $info = get_info_by_year_month($year,$month);
         $name = get_monthname($month);
+        $months = get_months();
     }else if(isset($_GET["Quarter"])){
         $pagination = new Pagination(PAGES_DONATIONREPORTQUARTER, $_GET,$year,$_GET["Quarter"]);
         $quarter = isset($_GET["Quarter"])? $_GET["Quarter"] : "";
-        $donations = get_donation_by_year_quarter($year,$quarter);
+        $donations = get_donation_by_year_quarter($year,$quarter,$_GET,false,$pagination);
         $info = get_info_by_year_quarter($year,$quarter);
         $name = get_quarter($quarter);
     }else{
@@ -20,6 +21,8 @@
         $info = get_info_by_year($year);
         
     }
+    $input = clean_array($_GET);
+
     
 ?>
 <h1>Donation report for <?php
@@ -50,7 +53,13 @@
 
     ?>
 
-<h3 class='total-count'><?=$pagination->get_total_rows()?> Item(s)</h3>
+
+
+
+
+<div class="backdrop"></div>
+
+
 
 
   <div class="who">
@@ -90,8 +99,50 @@
                 echo $cnt["cnt"];
                 ?></h3>
     </div>
-	
-    
+	 <h3 class='total-count'><?=$pagination->get_total_rows()?> Donation(s)</h3>
+    <button class="search-button">Search</button>
+    <form method="GET" class="search-form">
+    <input name="feature" value="donationreport" type="text" hidden/>
+
+    <div>
+        <label>Name: </label>
+        <input type="text" name="name" value="<?= show_value($input,"name") ?>" />
+    </div>
+
+    <?php if(!isset($_GET["Month"])):?> 
+    <div>
+        <?php $months = get_months();?>
+        <label>Month: </label>
+        <Select>
+            <option selected disabled hidden></option>
+            <?php foreach($months as $month):?>
+                <option  value ="<?=$month["MonthID"]?>"><?=$month["MonthName"]?></option>
+            <?php endforeach; ?>
+            </Select>  
+    </div>
+    <?php endif;?>
+    <?php if(!isset($_GET["Quarter"])):?>
+        <?php $quarters = get_quarters();?>
+        <label>Quarter: </label>
+        <Select>
+            <option selected disabled hidden></option>
+            <?php foreach($quarters  as $quarter ):?>
+                <option  value ="<?=$quarter["QuarterID"]?>"><?=$quarter["QuarterNUM"]?> - <?=$quarter["QuarterAbbv"]?></option>
+            <?php endforeach; ?>
+            </Select>  
+    <?php endif;?>
+    <div>
+        <label>Order by: </label>
+        <select name="order">
+            <option value="asc" <?= check_select($input,"order","asc") ?>>Ascending Order</option>
+            <option value="desc" <?= check_select($input,"order","desc") ?>>Descending Order</option>
+        </select>
+    </div>
+    <input type="submit" value="Search" />
+</form>
+
+<script src="js/search_form.js"></script>
+  
 <div class = "div-table">
     <table > 
         <tr>
@@ -152,7 +203,7 @@
                             
                     <?php $products = get_products_donated_by($donation["DonationID"])?>
                     <?php foreach($products as $product):?>
-                            <p><?=$product["ProductName"]?> - $<?=$product["Value"]?></p>
+                            <p style="padding:10px;width:90%;align-self:center"><?=$product["ProductName"]?> - $<?=$product["Value"]?></p>
                         <?php endforeach;?>
     </div>
 </div>

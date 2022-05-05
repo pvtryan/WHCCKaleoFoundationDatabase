@@ -12,7 +12,7 @@
 <h1>Reports</h1>
 <hr>
 
-<a class="feature-url" href="alldonation.php" >Report PDF</a>
+<a class="feature-url" onclick="Start()" href="alldonation.php" >Report PDF</a>
 <h3 class='total-count'><?= $pagination->get_total_rows() ?> Item(s)</h3>
 
 <button class="search-button">Search</button>
@@ -75,10 +75,10 @@
         <form method="GET" class="months">
         <input name="feature" value="donationreport" type="text" hidden/>
         <div class="form-group">
-            <label>Month for reports</label>
-            <input type="text" name="Year" value="<?=show_value($report, "Year")?>" hidden>
+            <label style="width:90%;align-self:center" >Month for reports</label>
+            <input style="width:90%;align-self:center" type="text" name="Year" value="<?=show_value($report, "Year")?>" hidden>
 
-            <select  name="Month"  required>
+            <select style="width:90%;align-self:center"  name="Month"  required>
 
             <option selected disabled hidden></option>
             <?php foreach($months as $month):?>
@@ -87,7 +87,7 @@
             </select>
             <br>
         
-            <input type="submit" value="Submit" />
+            <input style="width:90%;align-self:center"type="submit" value="Submit" />
             </form>
         </div>
     </div>
@@ -106,9 +106,9 @@
         <form method="GET" class="quarter">
         <input name="feature" value="donationreport" type="text" hidden/>
         <div class="form-group">
-            <label>Quarter for reports</label>
-            <input type="text" name="Year" value="<?=show_value($report, "Year")?>" hidden>
-            <select  name="Quarter" required>
+            <label style="width:90%;align-self:center">Quarter for reports</label>
+            <input style="width:90%;align-self:center" type="text" name="Year" value="<?=show_value($report, "Year")?>" hidden>
+            <select  style="width:90%;align-self:center" name="Quarter" required>
 
                 <option selected disabled hidden></option>
                 <?php foreach($quarters as $quarter):?>
@@ -116,7 +116,7 @@
                 <?php endforeach; ?>
             </select>
             <br>
-            <input type="submit" value="Submit" />
+            <input style="width:90%;align-self:center"type="submit" value="Submit" />
             </form>
         </div>
     </div>

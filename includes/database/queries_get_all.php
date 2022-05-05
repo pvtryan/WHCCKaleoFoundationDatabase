@@ -41,6 +41,7 @@ function get_users($search = [],$count = false, $pagination = null){
                 Username,
                 Role,
                 CONCAT(userLastName, ', ', userFirstName ) AS full_name,
+                CONCAT(userFirstName, ' ', userLastName ) AS full_name_rev,
                 Phone,
                 Email
             From Users
@@ -169,6 +170,7 @@ function get_events($search=[],$count = false,$pagination = null){
     $name = isset($search["name"]) && !empty($search["name"]) ? $search["name"] : "%";
     $name .= "%";
     $id = isset($search["id"]) && !empty($search["id"]) ? $search["id"] : "%";
+	$date = isset($search["date"]) && !empty($search["date"]) ? $search["date"] : "%";
     $orderby = "ORDER BY  EventName, EventID ";
 
    
@@ -197,13 +199,15 @@ function get_events($search=[],$count = false,$pagination = null){
             DATE_FORMAT(EventDate,'%M %D %Y') as format_date
         From Event
         WHERE EventID LIKE ?
-            AND EventDate LIKE ?
+            AND EventName LIKE ?
+			AND EventDate LIKE ?
         {$orderby}
     ";
 
-    $params = [$id,$name];
-    $types = "ss";
+    $params = [$id,$name,$date];
+    $types = "sss";
    
+
     if ($count)
         return Pagination::get_count_query($sql, $types, $params);
     else if ($pagination !== null)
@@ -213,14 +217,11 @@ function get_events($search=[],$count = false,$pagination = null){
 }
 
 function get_donation($search = [],$count = false, $pagination = null){
-    $id = isset($search["id"]) && !empty($search["id"]) ? $search["id"] : "%";
-    $event = '%';
-    $event = isset($search["event"]) && !empty($search["event"]) ? $search["event"] : "%";
-    $event .= '%';
-    $org = '%';
-    $org = isset($search["org"]) && !empty($search["org"]) ? $search["org"] : "%";
-    $org .= '%';
-    $orderby = "ORDER BY Donation.DonationID";
+	$id =isset($search["id"]) && $search["id"] !== "all" ? $search["id"] : '%';
+    $event =isset($search["event"]) && $search["event"] !== "all" ? $search["event"] : '%';
+    $org = isset($search["org"]) && $search["org"] !== "all" ? $search["org"] : '%';
+   $date = isset($search["date"]) && $search["date"] !== "all" ? $search["date"] : '%'; 
+   $orderby = "ORDER BY Donation.DonationID";
 
    
     if (isset($search["order"])) {
@@ -257,11 +258,12 @@ function get_donation($search = [],$count = false, $pagination = null){
     LEFT OUTER JOIN Event 
         ON Donation.EventID = Event.EventID
     WHERE Donation.DonationID LIKE ?
+    AND DATE_FORMAT(Donation.DonationDate, '%M %D %Y  - %h:%i:%s') LIKE ?
     {$orderby} 
     ";
     
-    $params = [$id];
-    $types = "s";
+    $params = [$id,$date];
+    $types = "ss";
     if ($count)
         return Pagination::get_count_query($sql, $types, $params);
     else if ($pagination !== null)
@@ -424,9 +426,10 @@ function get_products_not_empty($search=[],$count = false,$pagination = null){
         EstValue
     From Product
     WHERE ProductQuantity != 0 
+    AND ProductName Like ?
     ";
     
-    $params= [$year];
+    $params= [$name];
     $types = "s";
     if ($count)
         return Pagination::get_count_query($sql, $types, $params);

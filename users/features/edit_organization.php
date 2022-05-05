@@ -46,7 +46,14 @@
    if(isset($_POST["submit_organization"])){
        $errors = verify_organization($_POST);
        if(empty($errors)){
+            
+        update_organization($_POST["OrganizationName"],$_POST["contactfirstname"],$_POST["contactlastname"],$_POST["contactphone"],$_POST["contactemail"],$orgID);
 
+        echo"<div class='alertsuccess' >
+                <strong>Success!</strong> ".$_POST["OrganizationName"]." Edited
+                </div>
+                ";
+                $org = get_organization_id($orgID);
        }
    }
 

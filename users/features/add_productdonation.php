@@ -11,11 +11,16 @@
     $errors = [];
     $completed = isset($_GET["complete"])? $_GET["complete"] : "";
     if($completed === 'true'){
-        echo "<h3 style ='color:green'>Product Added</h3>";
+        echo"<div class='alertsuccess' >
+        <strong>Success!</strong> Item Added
+        </div>";
     }
 
-    if($_GET["complete_delete"]=== 'true'){
-        echo "<h3 style ='color:green'>Product Deleted</h3>";
+    $complete_delete = isset($_GET["complete_delete"])? $_GET["complete_delete"] : "";
+    if($complete_delete === 'true'){
+        echo"<div class='alertsuccess' >
+        <strong>Success!</strong> Item Deleted Successfully
+        </div>";
     }
 
 
@@ -63,14 +68,14 @@
         }
       
          $product = get_product_by_id($productID);
-        if($_GET["complete"] === 'false'){
+        if($completed === 'false'){
             $errors["quantity"] = "Quantity Cannot be Empty";
         }  
       
         if(isset($product)){
             
             if($productID == $product["ProductID"]){
-                if(isset($errors)){
+                if(isset($errors["quantity"])){
                     echo "<h3 style ='color:red'>". $errors["quantity"] . "</h3>";
                 }
          
@@ -159,8 +164,8 @@
         </div>
         <form method="post" class="quantity">
         <div class="form-group">
-            <label>Change Quantity</label>
-            <input type = "number" min = "1" max="<?php 
+            <label style="width:90%;align-self:center">Change Quantity</label>
+            <input style="width:90%;align-self:center" type = "number" min = "1" max="<?php 
                  $product_cur = get_product_by_id($donate["ID"]);
                 $all = $product_cur["ProductQuantity"] + $donate["productused"];
                     echo $all; ?>" 
@@ -172,7 +177,7 @@
                           
             <br>
         
-            <input type="submit" name="submit_change" />
+            <input  style="width:90%;align-self:center" type="submit" name="submit_change" />
             </form>
         </div>
     </div>
@@ -246,9 +251,9 @@
         <form method="post" class="quantity">
       
         <div class="form-group">
-        <input type = "number" min = "1" max="<?=$product["ProductQuantity"]?>" value="newquantity" name="newquantity" placeholder="MAX:<?=$product["ProductQuantity"]?>">
-                            <input type ="hidden" value="<?=show_value($product, "ProductID")?>" name="productID">
-                            <input type="submit" name="submit_donation" >
+        <input style="width:90%;align-self:center" type = "number" min = "1" max="<?=$product["ProductQuantity"]?>" value="newquantity" name="newquantity" placeholder="MAX:<?=$product["ProductQuantity"]?>">
+                            <input type ="hidden" value="<?=show_value($product, "ProductID")?>" name="productID"><br>
+                            <input style="width:90%;align-self:center" type="submit" name="submit_donation" >
             </form>
         </div>
     </div>

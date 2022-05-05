@@ -37,8 +37,19 @@
 			$this->Ln();
 			$this->Line(10,40,$this->getPageWidth()-10,40);
 
-              
-         
+        }
+
+        function Footer(){
+            $this->SetY(-15);
+            $this->SetFont('Arial', 'I', 8);
+            $this->SetTextColor(0,0,0);
+            $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        }
+
+        function report($header,$data){
+            global $donations,$info;
+            
+
             $this->Ln();
             $this->SetFont('Times','',12);
             $this->SetLineWidth(.3);
@@ -57,18 +68,8 @@
             $this->cellnocolor();
             $this->Cell(35,7,'$ '.$info["total_value"],1,0,'R',true);
             $this->Ln();
-        }
 
-        function Footer(){
-            $this->SetY(-15);
-            $this->SetFont('Arial', 'I', 8);
-            $this->SetTextColor(0,0,0);
-            $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-        }
 
-        function report($header,$data){
-            global $donations;
-            
             $this->SetFont('Times','B','14');
 	        $this->Cell(40,10,'Donation List',0,0,'C');
 	        $this->Ln();

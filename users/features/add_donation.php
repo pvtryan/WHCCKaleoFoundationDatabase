@@ -4,18 +4,6 @@
     $events = get_events();
     $orgs = get_organizations();
 
-    function get_next_donation(){
-        $sql="
-            SELECT AUTO_INCREMENT 
-            FROM information_schema.TABLES 
-            WHERE TABLE_SCHEMA = 'kaleo' 
-            AND TABLE_NAME = 'Donation'
-  
-        ";
-        $result = query_one_np($sql);
-	return $result;
-    }
-
     function validate_new_donation($input){
         if ($input['event'] === '') {
             $input['event'] = null; // or 'NULL' for SQL
@@ -68,11 +56,15 @@
                 $name = $org["OrganizationName"];
             }
            
-            $next = get_next_donation();
-             $current = $next["AUTO_INCREMENT"] - 1;
-           
-            echo "<h3 style ='color:green'>Donation Added</h3>";
-            echo "<a style ='color:green' href='user.php?feature=add_productdonation&DonationID=". $current ."'>Click Here to Add to ".$name."</a>";
+            $previous = get_next_donation();
+             $current = $previous["ID"]++;
+             echo "<div class='alertsuccess' >
+             <strong>Success!</strong>
+             <a  style = 'text-decoration: none; color:white' href='user.php?feature=add_productdonation&DonationID=". $current ."'>Click Here to Add to ".$name."</a>
+            </div>
+             ";
+            
+            $current = '';
             $input = [];
         }
     }
@@ -82,8 +74,15 @@
 <hr>
 <div class = "who">
 <h3 style="color:red">* Only select One</h3>
-<div>
+</div>
 <form method="post" class="form">
+
+<div class = "form-group">
+    <label>If an Event has not been Entered: <a class="clickhere" href="user.php?feature=add_event">Click Here!</a></label> 
+
+
+</div>
+<div class ="who">
 <div class="form-group">
         <label>Event</label>
         <select <?= error_outline($errors, "event") ?> name="event" id="event" >
@@ -96,7 +95,14 @@
         </select>
         <?=show_error($errors, "event")?>
     </div>
+          </div>
 
+    <div class = "form-group">
+    <label>If an Organization has not been Entered: <a class="clickhere" href="user.php?feature=add_organization">Click Here!</a></label>
+
+
+</div>
+<div class = "who">
     <div class="form-group">
         <label>Organization</label>
         <select <?= error_outline($errors, "org") ?> name="org" id="org" >
@@ -109,7 +115,8 @@
         </select>
         <?=show_error($errors, "org")?>
     </div>
-
+    </div>
     <input type="submit" name="submit_new_donation" >
 
           </form>
+        

@@ -1,6 +1,6 @@
 <?php
 
-    function get_donation_by_id($id){
+    function get_donation_by_id($id,$search=[],$count = false,$pagination = null){
         $sql="
             SELECT
                 DonationProducts.DonationID,
@@ -14,7 +14,17 @@
             WHERE DonationID = ?
         
         ";
-        return query_many($sql, "s", [$id]);
+
+        $params= [$id];
+        $types = "s";
+
+        
+        if ($count)
+            return Pagination::get_count_query($sql, $types, $params);
+        else if ($pagination !== null)
+            return $pagination->get_pagination_query($sql, $types, $params);
+        else
+            return query_many($sql, $types, $params);
     }
 
 

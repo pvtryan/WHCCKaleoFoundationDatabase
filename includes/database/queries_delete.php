@@ -40,6 +40,14 @@ function delete_event($id){
     return query($sql, "i" ,[$id]);
 }
 
+function delete_user($id){
+    $sql = "
+        DELETE From Users
+        Where UserID = ?
+    ";
+    return query($sql, "i",[$id]);
+}
+
 function can_event_be_delete($EventID){
     $sql="
         SELECT 
@@ -68,5 +76,25 @@ function can_org_be_delete($org_id){
     $row = query_one($sql,"s",[$org_id]);
     if(!$row) return true;
     return (int)$row["org"] === 0;
+}
+
+function delete_product($id){
+    $sql = "
+        Delete From Product
+        Where ProductID = ?
+    ";
+    return query($sql, "i",[$id]);
+
+}
+
+function can_product_be_delete($product){
+    $sql = "
+        SELECT Count(DonationProducts.ProductID) as cnt
+        From DonationProducts
+        Where DonationProducts.ProductID = ?
+    ";
+    $row = query_one($sql,"s",[$product]);
+    if(!$row) return true;
+    return (int)$row["cnt"] === 0;
 }
 ?>

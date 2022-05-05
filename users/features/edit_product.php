@@ -41,8 +41,12 @@ function validate_product($input){
             $input = clean_array($_POST);
             if(empty($errors)){
                 update_product_info($productID,$_POST["productname"],$_POST["quantity"], $_POST["productunits"],$_POST["estvalue"]);
-                echo "<h3 style='color:green'>Updated ". $_POST["productname"] ."</h3><br>";
-                echo "<a class='returnbutton'  href='user.php?feature=list_products'>Click Here to Return to Inventory</a><br>";
+            
+                echo "<div class='alertsuccess' >
+                <strong>Success!</strong> 
+                <h3'>Updated ". $_POST["productname"] ."</h3>
+                <br>
+              </div>";
                 $input = [];
                 $product=get_product_by_id($productID);
             }

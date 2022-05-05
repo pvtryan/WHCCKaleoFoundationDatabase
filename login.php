@@ -7,7 +7,6 @@
 
 function getUserIP()
 {
-    // Get real visitor IP behind CloudFlare network
     if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
               $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
               $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
@@ -46,7 +45,7 @@ if(isset($_POST["submit_login"])){
         login_user($_POST);
         $username = get_user_by_username($_POST["username"]);
         insert_logindate($username["UserID"],$ip);
-        sleep(4);
+        sleep(2);
         
         change_page('user.php');
     }

@@ -66,7 +66,9 @@
             update_user_info($user["UserID"],$first_name,$last_name,$username,$role,$phone,$email);
 
             $usernow = get_user_by_id($user["UserID"]);
-            echo "<h3 style='color:green'>Successfully edited: " . $usernow["full_name"] ."</h3>";
+            echo "<div class='alertsuccess' >
+            <strong>Success!</strong> Successfully edited: " . $usernow["full_name"] ."
+            </div>";
 
         }
     }
@@ -118,7 +120,6 @@
         <select <?=error_outline($errors, "role")?> name="role" id="role" required>
             <option <?=check_select($usernow, "Role" , 1)?>  value="1">Admin</option>
             <option <?=check_select($usernow, "Role" , 2)?>  value="2">Standard User</option>
-            <option <?=check_select($usernow, "Role" , 3)?>  value="3">Driver</option>
         </select>
 </div>
 <?php elseif(isset($_GET["useron"])): ?>

@@ -473,8 +473,8 @@ h2.center {
     25% 50%
   );
   transition: all 0.25s;
-  color: var(--dark-yellow);
-  background-color: var(--dark-yellow);
+  color: var(--header-color);
+  background-color: var(--header-color);
   outline: none;
   border: none;
   margin-top: 0;
@@ -555,7 +555,7 @@ h2.center {
 .use-case-button {
   margin: 5px;
   padding: 5px;
-  background-color: var(--dark-yellow);
+  background-color: var(--header-color);
   text-align: center;
 }
 
@@ -623,8 +623,8 @@ h2.center {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #3498db;
-  -webkit-animation: spin .7s linear infinite;
-  animation: spin .7s linear infinite;
+  -webkit-animation: spin 1.2s linear infinite;
+  animation: spin 1.2s linear infinite;
   display:none;
 }
 
@@ -662,5 +662,3 @@ h2.center {
   max-width: 400px;
   padding: 25px;
 }
-
-#m

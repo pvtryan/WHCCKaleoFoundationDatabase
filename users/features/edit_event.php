@@ -55,7 +55,12 @@
             $errors = verify_event($_POST);
             if(empty($errors)){
                 update_event($_POST["event_date"],$_POST["EventName"],$_POST["contactfirstname"],$_POST["contactlastname"],$_POST["contactphone"],$_POST["contactemail"],$eventID);
-                echo "<h3 style='color:green'>Event Updated</h3>";
+                echo"<div class='alertsuccess' >
+                <strong>Success!</strong> Event Edited
+                </div>
+                ";
+
+                $event = get_event_by_id($eventID);
                 }
     }
 

@@ -61,11 +61,13 @@ if(isset($_POST["submit_new_student"])){
             insert_user($_POST["first_name"], $_POST["last_name"],$username,$hash_password,$_POST["Role"],$_POST["phone"],$_POST["email"]);
            
 
-        echo "<h3 style ='color:green'>User Added " .$_POST["first_name"]." </h3><br>";
+        
         $link = "userdetails.php?username=" .$username . "&password=" .$password;
-        echo '<a style="color:green" href="' .$link. '">Generate User PDF</a>';
+       
 
-
+        echo"<div class='alertsuccess' >
+        <strong>Success!</strong> <a style='color:white;text-decoration:none'href='" .$link. "'>Click here to Generate User PDF</a>
+        </div>";
             $input = [];
     }
 
@@ -101,7 +103,6 @@ if(isset($_POST["submit_new_student"])){
             <option selected disabled hidden></option>
             <option <?= check_select($input,"Role", "1") ?> value="1">Admin</option>
             <option <?= check_select($input,"Role","2") ?> value="2">Standard User</option>
-            <option <?= check_select($input,"Role","3") ?> value="3">Driver</option>
            
         </select>
         <?=show_error($errors, "Role")?>

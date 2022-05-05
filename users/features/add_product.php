@@ -42,7 +42,10 @@
         
         if(empty($errors)){
          insert_product($_POST["product_name"],$_POST["quantity"],$_POST["productunits"],$_POST["estvalue"]);
-          echo "<h3 style ='color:green'>Product Added</h3>";
+         echo"<div class='alertsuccess' >
+         <strong>Success!</strong> ".$_POST["product_name"]." Added
+         </div>
+         ";
             $input = [];
         }
     }
@@ -68,7 +71,7 @@
     </div>
 
     <div class = "form-group">
-        <label>Est. Value</label>
+        <label>Est. Value Per Unit</label>
         <input <?= error_outline($errors,"estvalue") ?> type="text" name="estvalue" value="<?=show_value($input,"estvalue")?>" >
         <?=show_error($errors, "estvalue")?>
     </div>

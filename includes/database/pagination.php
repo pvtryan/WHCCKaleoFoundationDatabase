@@ -19,6 +19,7 @@ define('PAGES_DONATIONREPORTYEAR',6);
 define('PAGES_DONATIONREPORTMONTH',7);
 define('PAGES_DONATIONREPORTQUARTER',8);
 define('PAGES_INVENTORYADD',9);
+define('PAGES_DONATIONPRODUCT',10);
 
 class Pagination{//Thisclass for the pagination for the list pages to limit amount of rows per page 
   private $list_type;
@@ -47,8 +48,8 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
       // $w_height as an integer instead of a string, then it worked. I also changed
       // 70 to 30 to fit more on a page
       // height is equal to screen height - navbar - h1 - hr - h3 - button - pagination-link - footer
-      $height = $w_height - 48 - 30 - 41 - 33 - 19 - 45 - 55 - 64;
-      $list_limit = round((int)$height/30) - 4;
+      $height = $w_height - 48 - 30 - 41 - 33 - 19 - 45 - 55 - 64;     
+      $list_limit = round((int)$height/30) - 9;      
       return $list_limit > 9? $list_limit : 9;
   }
 
@@ -113,7 +114,10 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
       case PAGES_INVENTORYADD:
         return get_products_not_empty($_GET,true);
         break;
-        default:
+      case PAGES_DONATIONPRODUCT:
+        return get_donation_by_id($this->id,$_GET,true);
+        break;
+      default:
         return -1;
     }
     return -1;
@@ -151,7 +155,7 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
   public function print_next_link(){
     
     if($this->current_page == $this->total_pages){
-      echo "<a class='pagination-link'>></a>";
+      
 
     }else{
       $page = $this->current_page;
@@ -174,7 +178,7 @@ class Pagination{//Thisclass for the pagination for the list pages to limit amou
   public function print_back_link(){
   
     if($this->current_page == 1){
-      echo "<a class='pagination-link'><</a>";
+     
 
     }else{
       $page = $this->current_page;

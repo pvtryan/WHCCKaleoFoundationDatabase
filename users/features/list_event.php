@@ -35,6 +35,11 @@
     <input type="text" name="id" value="<?= show_value($input,"id") ?>" />
 </div>
 
+<div>
+    <label>Date: </label>
+    <input type="date" name="date" value="<?= show_value($input,"date") ?>" />
+</div>
+
 
 <div>
     <label>Order by: </label>

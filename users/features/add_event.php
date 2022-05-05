@@ -53,8 +53,10 @@ if(isset($_POST["submit_new_event"])){
     $input = clean_array($_POST);
     if(empty($errors)){
         insert_events($_POST["event_date"],$_POST["event_name"],$_POST["firstname"],$_POST["lastname"],$_POST["phone"],$_POST["email"]);
-
-        echo "<h3 style = 'color:green'>Event Added</h3>";
+        echo"<div class='alertsuccess' >
+             <strong>Success!</strong> Event Added
+             </div>
+             ";
         $input = [];
     }
 }

@@ -30,21 +30,10 @@ if(isset($_GET["delete"])){
         <label>ID: </label>
         <input type="text" name="id" value="<?= show_value($input,"id") ?>" />
     </div>
-    <div>
-        <label>Event Name: </label>
-        <input  type="text" name="event" value="<?= show_value($input,"event") ?>" />
-    </div>
-
-    <div>
-        <label>Organization Name: </label>
-        <input type="text" name="org" value="<?= show_value($input,"org") ?>" />
-    </div>
-    
+        
     <div>
         <label>Date: </label>
-        <select name="order">
-            
-        </select>
+       <input type="date" name="date" value="<?= show_value($input,"date") ?>" />
     </div>
 
 
@@ -113,6 +102,9 @@ if(isset($_GET["delete"])){
                     </div>
                     <div class="info-shown-div-links">
                                 <a class="feature-url" href="user.php?feature=donationproduct&DonationID=<?=$donation["DonationID"]?>">Show Products</a>
+                                <?php if($count["numofProduct"] != 0):?>
+                           
+                                <?php else:?>
                                 <a class="feature-url" onclick="return confirm('Are you sure you want to delete donation <?php
                                 if($donation["EventID"] == NULL){
                                     echo $donation["org_name"];
@@ -125,6 +117,7 @@ if(isset($_GET["delete"])){
                                     echo $donation["event_name"];
                                 }
                                 ?></a>
+                                <?php endif;?>
                      <div>
                 </div>
         </td>

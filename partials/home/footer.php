@@ -5,7 +5,9 @@
 </main>
 
 <footer class="footer">
-        <div class="mainlinks"></div>
+        <div class="mainlinks">
+                <a class="mainlink" href="about.php">About</a>
+            </div>
         <div class="box2"><img class="logo" src="images/Kaleo_logo.png" alt="Logo Text"></div>
 
 </footer>

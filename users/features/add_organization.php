@@ -47,8 +47,11 @@
         $input = clean_array($_POST);
         if(empty($errors)){
             insert_organization($_POST["org_name"],$_POST["firstname"],$_POST["lastname"],$_POST["phone"],$_POST["email"]);
-
-            echo "<h3 style = 'color:green'>Organization Added</h3>";
+            echo"<div class='alertsuccess' >
+            <strong>Success!</strong> ".$_POST["org_name"]." Added <a  style = 'text-decoration: none; color:white'  href='user.php?feature=add_donation'>Click Here to Make Donation</a>
+	</div>
+            ";
+            
             $input = [];
         }
     }

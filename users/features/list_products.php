@@ -7,7 +7,10 @@
     $input = clean_array($_GET);
 
 
-
+    if(isset($_GET["delete"])){
+            delete_product($_GET["delete"]);
+            change_page(link_without("delete"));
+    }
    
 
 ?>
@@ -75,7 +78,13 @@
                     </div>
                     <div class="info-shown-div-links">
                         <a class="feature-url" href="user.php?feature=edit_product&ProductID=<?=$product["ProductID"]?>">Edit Product</a>
-                        <a class="feature-url" href="">Delete Item</a>
+                       
+
+                        <?php if(can_product_be_delete($product["ProductID"])):?>
+                            <a class="feature-url" onclick="return confirm('Are you sure you want to delete item. ')" href="<?=link_without("") . "&delete={$product["ProductID"]}"?>" >Delete</a>
+                           <?php else:?>
+                            
+                           <?php endif;?>
                     </div>
                 </div>
         </td>

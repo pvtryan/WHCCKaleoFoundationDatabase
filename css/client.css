@@ -261,7 +261,7 @@ footer {
   left: calc(50% - 62.5px);
   height: 125px;
   width: 125px;
-  border-radius: 50%;
+  border-radius: 0%;
   border: 8px solid var(--footer-red);
   border-bottom: none;
   background-color: var(--footer-red);
@@ -469,7 +469,7 @@ top: 1px;
   top: 25%;
   border-radius: 5px;
   border: 1px solid #888;
-  width: 25%;
+  width: 40%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   animation-name: animatetop;
   animation-duration: 0.4s
@@ -494,6 +494,10 @@ top: 1px;
   font-weight: bold;
 }
 
+.close span{
+   padding-right:5px ;
+}
+
 .close:hover,
 .close:focus {
   color: #000;
@@ -504,7 +508,7 @@ top: 1px;
 .modal-header {
   padding: 10px 16px;
   background-color: var(--header-color);
-  border-radius:5px 5px 0;
+  border-radius: 5px 5px 0 0;
   color: white;
 }
 
@@ -516,6 +520,11 @@ top: 1px;
  
 }
 
+.modal input{
+  padding: 5px;
+  align-self: center;
+  width: 75%
+}
 .modal-body{
   padding: 10px 16px;
 }
@@ -533,6 +542,7 @@ top: 1px;
   border-top: 16px solid #3498db;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+  display: none;
 }
 
 @-webkit-keyframes spin {
@@ -591,4 +601,22 @@ top: 1px;
 
 .returnbutton:active {
   top: 1px;
+}
+
+.alertsuccess {
+  padding: 20px;
+  background-color: #42ba96;
+  color: white;
+  border-color:green ;
+  border-radius: 10px;
+  opacity: 75%;
+}
+
+.alerterror {
+  padding: 20px;
+  background-color: red;
+  color: white;
+  border-color:darkred ;
+  border-radius: 10px;
+  opacity: 75%;
 }

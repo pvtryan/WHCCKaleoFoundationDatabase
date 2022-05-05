@@ -65,7 +65,10 @@ if(isset($_POST["submit_password"])){
 		
 			update_password($user["UserID"],$new_password);
 		
-		echo "<h3 style='color: green'>Updated Password Successfully</h3>";
+		echo "<div class='alertsuccess' >
+        <strong>Success!</strong> Updated Password Successfully
+        </div>";
+
 		$input = [];
 	}
 }

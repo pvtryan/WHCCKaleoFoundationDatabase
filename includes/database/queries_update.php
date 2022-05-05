@@ -79,7 +79,7 @@
                 OrganizationEmail = ?
             Where OrganizationID = ?
         ";
-        return query($sql,"sssssi",["$name,$first,$last,$phone,$email,$id"]);
+        return query($sql,"sssssi",[$name,$first,$last,$phone,$email,$id]);
     }
 
 ?>

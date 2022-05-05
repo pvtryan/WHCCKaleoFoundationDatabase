@@ -1,9 +1,9 @@
 <?php
     check_user([ADMIN,USER]);
-
+    
     $DonationID  =  isset($_GET["DonationID"])? $_GET["DonationID"] : "";
-
-    $donations = get_donation_by_id($DonationID);
+    $pagination = new Pagination(PAGES_DONATIONPRODUCT, $_GET, $DonationID);
+    $donations = get_donation_by_id($DonationID,$_GET,false,$pagination);
     $recipient = get_donation_name_by_id($DonationID);
 
     function validate_quantity($input){
@@ -63,6 +63,17 @@ $input = [];
 <hr>
 
 <a class="feature-url"  href="user.php?feature=add_productdonation&DonationID=<?=$DonationID?>">Add Products</a>
+    <?php $link = "productsperdonation.php?DonationID=" . $DonationID;
+     if($recipient["EventID"] == NULL){
+        $name =  $recipient["org_name"];
+    }else{
+        $name =  $recipient["event_name"];
+    }
+    
+    echo '<a class="feature-url" href="'. $link .'">Donations For '. $name .' </a>';?>
+
+ 
+<h3 class='total-count'><?= $pagination->get_total_rows() ?> Item(s)</h3>
 
 
 <div class="div-table">
@@ -100,8 +111,8 @@ $input = [];
                 <form method="post" class="quantity">
                 
                 <div class="form-group">
-                    <label>Change Quantity for <?=$donation["item"]?></label>
-                    <input <?= error_outline($errors,"changequantity") ?> type = "number" min = "1" max="<?php 
+                    <label style="width:90%;align-self:center">Change Quantity for <?=$donation["item"]?></label>
+                    <input style="width:90%;align-self:center"<?= error_outline($errors,"changequantity") ?> type = "number" min = "1" max="<?php 
                         $product_cur = get_product_by_id($donation["ProductID"]);
                         $all = $product_cur["ProductQuantity"] + $donation["Quantity"];
                         echo $all;                    
@@ -120,7 +131,7 @@ $input = [];
                     <?=show_error($errors, "productID")?>
                     <input name="productID" value="<?=show_value($donation,"ProductID")?>" type="text" hidden/>
                 
-                    <input type="submit" name="submit_quantity" />
+                    <input style="width:90%;align-self:center" type="submit" name="submit_quantity" />
                     </form>
                 </div>
             </div>
@@ -133,4 +144,5 @@ $input = [];
         <?php endforeach; ?>
 </table>
     </div>
+    <?php $pagination->print_all_links() ?>
     <br>

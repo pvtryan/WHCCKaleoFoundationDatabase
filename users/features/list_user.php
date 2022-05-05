@@ -7,6 +7,14 @@
     $users = get_users($_GET,false,$pagination);
 
     $input = clean_array($_GET);
+
+    if(isset($_GET["delete"])){
+        delete_user($_GET["delete"]);
+        echo"<div class='alertsuccess' >
+        <strong>Success!</strong> User was Removed.
+        </div>";
+
+    }
 ?>
 <h1>List of Users</h1>
 <hr>
@@ -111,7 +119,7 @@
                                     <a class="feature-url" href="user.php?feature=edit_user&UserID=<?=$user["UserID"]?>">Edit Info</a>
                                     
                                     <?php endif;?>
-                                <a class="feature-url" href="">Delete User</a>
+                                <a class="feature-url" onclick="return confirm('Are you sure you want to remove <?=$user['full_name_rev']?>')" href="user.php?feature=list_user&delete=<?=$user["UserID"]?>">Delete User</a>
                      <div>
                 </div>
         </td>

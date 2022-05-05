@@ -72,6 +72,23 @@
             $this->Ln();
            
 
+       
+	      
+        }
+
+        function Footer(){
+            $this->SetY(-15);
+            $this->SetFont('Arial', 'I', 8);
+            $this->SetTextColor(0,0,0);
+            $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        }
+
+
+        function report($header,$data){
+            global $donations,$year,$info,$name,$month,$quarter;
+            
+
+         
             $this->SetFont('Times','','14');
 	      
 	        $this->SetLineWidth(.3);
@@ -90,22 +107,6 @@
             $this->cellnocolor();
             $this->Cell(35,7,'$ '.$info["total_value"],1,0,'R',true);
             $this->Ln();
-	      
-        }
-
-        function Footer(){
-            $this->SetY(-15);
-            $this->SetFont('Arial', 'I', 8);
-            $this->SetTextColor(0,0,0);
-            $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-        }
-
-
-        function report($header,$data){
-            global $donations,$year,$info,$name,$month,$quarter;
-            
-
-         
 	      
            
             $this->SetFont('Times','B','14');
