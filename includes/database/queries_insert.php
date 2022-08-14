@@ -78,7 +78,7 @@
 
     function insert_vistors($ip){
         $sql = "
-            INSERT INTO Vistors($ip,Date)
+            INSERT INTO Vistors(IPADDRESS,Date)
             VALUES(?,CURRENT_TIMESTAMP())
         ";
         return query($sql,"s", [$ip]);
