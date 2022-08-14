@@ -76,5 +76,12 @@
         return query($sql,"i",[$OrgID]);
     }
 
+    function insert_vistors($ip){
+        $sql = "
+            INSERT INTO Vistors($ip,Date)
+            VALUES(?,CURRENT_TIMESTAMP())
+        ";
+        return query($sql,"s", [$ip]);
+    }
 
 ?>
